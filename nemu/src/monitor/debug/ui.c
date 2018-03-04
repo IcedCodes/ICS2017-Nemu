@@ -46,7 +46,26 @@ static int cmd_si(char *args){
 	cpu_exec(n);
 	return 0;
 }
-
+static int cmd_info(char* args)
+{
+	char *arg = strtok(NULL, " ");
+	if (arg == NULL)
+	{
+		printf("Sorry, you must input an argument!\n");
+	}
+	else if(strcmp(arg, "r") == 0)
+	{
+		printf("eax: %x\t%d\n", cpu.eax, cpu.eax);
+		printf("ebx: %x\t%d\n", cpu.ebx, cpu.ebx);
+		printf("ecx: %x\t%d\n", cpu.ecx, cpu.ecx);
+		printf("edx: %x\t%d\n", cpu.edx, cpu.edx);
+		printf("ebp: %x\t%d\n", cpu.ebp, cpu.ebp);
+		printf("esi: %x\t%d\n", cpu.esi, cpu.esi);
+		printf("edi: %x\t%d\n", cpu.edi, cpu.edi);
+		printf("esp: %x\t%d\n", cpu.esp, cpu.esp);
+	}
+	return 0;
+}
 static struct {
   char *name;
   char *description;
@@ -55,7 +74,8 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  {"si", "step by step n times", cmd_si}
+  {"si", "step by step n times", cmd_si},
+  {"info","printf the infomation of registers",cmd_info},
   /* TODO: Add more commands */
 
 };
