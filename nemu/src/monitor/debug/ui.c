@@ -55,14 +55,14 @@ static int cmd_info(char* args)
 	}
 	else if(strcmp(arg, "r") == 0)
 	{
-		printf("eax: %0x\t%d\n", cpu.eax, cpu.eax);
-		printf("ebx: %0x\t%d\n", cpu.ebx, cpu.ebx);
-		printf("ecx: %0x\t%d\n", cpu.ecx, cpu.ecx);
-		printf("edx: %0x\t%d\n", cpu.edx, cpu.edx);
-		printf("ebp: %0x\t%d\n", cpu.ebp, cpu.ebp);
-		printf("esi: %0x\t%d\n", cpu.esi, cpu.esi);
-		printf("edi: %0x\t%d\n", cpu.edi, cpu.edi);
-		printf("esp: %0x\t%d\n", cpu.esp, cpu.esp);
+		printf("eax: %08x\t%d\n", cpu.eax, cpu.eax);
+		printf("ebx: %08x\t%d\n", cpu.ebx, cpu.ebx);
+		printf("ecx: %08x\t%d\n", cpu.ecx, cpu.ecx);
+		printf("edx: %08x\t%d\n", cpu.edx, cpu.edx);
+		printf("ebp: %08x\t%d\n", cpu.ebp, cpu.ebp);
+		printf("esi: %08x\t%d\n", cpu.esi, cpu.esi);
+		printf("edi: %08x\t%d\n", cpu.edi, cpu.edi);
+		printf("esp: %08x\t%d\n", cpu.esp, cpu.esp);
 	}
 	return 0;
 }
