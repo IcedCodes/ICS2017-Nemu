@@ -55,14 +55,14 @@ static int cmd_info(char* args)
 	}
 	else if(strcmp(arg, "r") == 0)
 	{
-		printf("eax: 0x%08x\t%d\n", cpu.eax, cpu.eax);
-		printf("ebx: 0x%08x\t%d\n", cpu.ebx, cpu.ebx);
-		printf("ecx: 0x%08x\t%d\n", cpu.ecx, cpu.ecx);
-		printf("edx: 0x%08x\t%d\n", cpu.edx, cpu.edx);
-		printf("ebp: 0x%08x\t%d\n", cpu.ebp, cpu.ebp);
-		printf("esi: 0x%08x\t%d\n", cpu.esi, cpu.esi);
-		printf("edi: 0x%08x\t%d\n", cpu.edi, cpu.edi);
-		printf("esp: 0x%08x\t%d\n", cpu.esp, cpu.esp);
+		printf("eax: 0x%08x\t\t%d\n", cpu.eax, cpu.eax);
+		printf("ebx: 0x%08x\t\t%d\n", cpu.ebx, cpu.ebx);
+		printf("ecx: 0x%08x\t\t%d\n", cpu.ecx, cpu.ecx);
+		printf("edx: 0x%08x\t\t%d\n", cpu.edx, cpu.edx);
+		printf("ebp: 0x%08x\t\t%d\n", cpu.ebp, cpu.ebp);
+		printf("esi: 0x%08x\t\t%d\n", cpu.esi, cpu.esi);
+		printf("edi: 0x%08x\t\t%d\n", cpu.edi, cpu.edi);
+		printf("esp: 0x%08x\t\t%d\n", cpu.esp, cpu.esp);
 	}
 	return 0;
 }
@@ -75,7 +75,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   {"si", "step by step n times", cmd_si},
-  {"info","printf the infomation of registers",cmd_info},
+  {"info","printf the infomation of registers or watchpoints\n-r show the infomation of the 8 regsisters",cmd_info},
   /* TODO: Add more commands */
 
 };
