@@ -96,7 +96,7 @@ static int cmd_x(char *args)
 				return 0;
 			}
 			i++;
-			printf("i: %d\t%d\t",i,address);
+			printf("\ni: %d\t%d\t",i,address);
 		}
 	}
 	else
@@ -104,7 +104,7 @@ static int cmd_x(char *args)
 		printf("Wrong Address Format!");
 		return 0;
 	}
-	printf("Address: 0x%08x\n", address);
+	printf("\nAddress: 0x%08x\n", address);
 	for (i = 0; i < n; i++)
 	{
 		printf("%x\n", paddr_read(address + i * 4, 4));
