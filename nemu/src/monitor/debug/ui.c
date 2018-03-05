@@ -102,6 +102,7 @@ static int cmd_x(char *args)
 		printf("Wrong Address Format!\n");
 		return 0;
 	}
+	printf("  地址\t\t  十六进制\t\t  十进制");
 	for (i = 0; i < n; i++)
 	{
 		printf("0x%08x\t%x       \t%d\n", address + i * 4,paddr_read(address + i * 4, 4), paddr_read(address + i * 4, 4));
