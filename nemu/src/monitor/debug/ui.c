@@ -66,6 +66,46 @@ static int cmd_info(char* args)
 	}
 	return 0;
 }
+
+static int cmd_x(char *args)
+{
+	int n, i;
+	uint32_t address;
+	char *arg = strtok(NULL, " ");
+	n = atoi(arg);
+	arg = strtok(NULL, " ");
+	//change the inputed address to uint32_t
+	if (arg[0] == '0' && arg[1] == 'x')
+	{
+		i = 3;
+		address = 0;
+		while (arg[i] != '\0')
+		{
+			if (arg[i] >= '0' && arg[i] <= '9')
+			{
+				address = address * 16 + arg[i] - '0';
+			}
+			else if (arg[i] >= 'a' && arg[i] <= 'f')
+			{
+				address = address * 16 + arg[i] - 'a' + 10;
+			}
+			else {
+				printf("Wrong Address Format!");
+				return 0;
+			}
+		}
+	}
+	else
+	{
+		printf("Wrong Address Format!");
+		return 0;
+	}
+	for (i = 0; i < n; i++)
+	{
+		printf("%x\n", paddr_read(address + i * 4, 4));
+	}
+	return 0;
+}
 static struct {
   char *name;
   char *description;
@@ -76,6 +116,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   {"si", "step by step n times", cmd_si},
   {"info","printf the infomation of registers or watchpoints\n-r show the infomation of the 8 regsisters",cmd_info},
+  {"x","Scan Memory\n - n adress :scan n bytes from adress",cmd_x},
   /* TODO: Add more commands */
 
 };
