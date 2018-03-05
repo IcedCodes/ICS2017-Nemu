@@ -73,7 +73,9 @@ static int cmd_x(char *args)
 	uint32_t address;
 	char *arg = strtok(NULL, " ");
 	n = atoi(arg);
+	printf("n: %d\n", n);
 	arg = strtok(NULL, " ");
+	printf("arg: %s\n", arg);
 	//change the inputed address to uint32_t
 	if (arg[0] == '0' && arg[1] == 'x')
 	{
