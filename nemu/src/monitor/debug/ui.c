@@ -101,6 +101,7 @@ static int cmd_x(char *args)
 		printf("Wrong Address Format!");
 		return 0;
 	}
+	printf("Address: 0x%08x\n", address);
 	for (i = 0; i < n; i++)
 	{
 		printf("%x\n", paddr_read(address + i * 4, 4));
