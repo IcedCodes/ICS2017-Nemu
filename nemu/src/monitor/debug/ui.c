@@ -104,7 +104,7 @@ static int cmd_x(char *args)
 	}
 	for (i = 0; i < n; i++)
 	{
-		printf("%x       \t%d\n", paddr_read(address + i * 4, 4), paddr_read(address + i * 4, 4));
+		printf("Address:0x%08x\t%x       \t%d\n", address ,paddr_read(address + i * 4, 4), paddr_read(address + i * 4, 4));
 	}
 	return 0;
 }
