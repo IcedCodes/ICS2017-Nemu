@@ -73,9 +73,7 @@ static int cmd_x(char *args)
 	uint32_t address;
 	char *arg = strtok(NULL, " ");
 	n = atoi(arg);
-	printf("n: %d\n", n);
 	arg = strtok(NULL, " ");
-	printf("arg: %s\n", arg);
 	//change the inputed address to uint32_t
 	if (arg[0] == '0' && arg[1] == 'x')
 	{
@@ -105,10 +103,11 @@ static int cmd_x(char *args)
 	}
 	for (i = 0; i < n; i++)
 	{
-		printf("%08x\t%d\n", paddr_read(address + i * 4, 4), paddr_read(address + i * 4, 4));
+		printf("%x\t%d\n", paddr_read(address + i * 4, 4), paddr_read(address + i * 4, 4));
 	}
 	return 0;
 }
+
 static struct {
   char *name;
   char *description;
