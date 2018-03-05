@@ -79,7 +79,7 @@ static int cmd_x(char *args)
 	//change the inputed address to uint32_t
 	if (arg[0] == '0' && arg[1] == 'x')
 	{
-		i = 3;
+		i = 2;
 		address = 0;
 		while (arg[i] != '\0')
 		{
