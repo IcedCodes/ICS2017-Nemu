@@ -93,6 +93,7 @@ static int cmd_x(char *args)
 				printf("Wrong Address Format!");
 				return 0;
 			}
+			i++;
 		}
 	}
 	else
@@ -115,8 +116,8 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   {"si", "step by step n times", cmd_si},
-  {"info","printf the infomation of registers or watchpoints\n-r show the infomation of the 8 regsisters",cmd_info},
-  {"x","Scan Memory\n - n adress :scan n bytes from adress",cmd_x},
+  {"info","printf the infomation of registers or watchpoints\n\t-r show the infomation of the 8 regsisters",cmd_info},
+  {"x","Scan Memory\n\t - n adress :scan n bytes from adress",cmd_x},
   /* TODO: Add more commands */
 
 };
