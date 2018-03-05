@@ -96,6 +96,7 @@ static int cmd_x(char *args)
 				return 0;
 			}
 			i++;
+			printf("i: %d\t%d\t",i,address);
 		}
 	}
 	else
