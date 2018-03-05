@@ -90,7 +90,7 @@ static int cmd_x(char *args)
 				address = address * 16 + arg[i] - 'a' + 10;
 			}
 			else {
-				printf("Wrong Address Format!");
+				printf("Wrong Address Format!\n");
 				return 0;
 			}
 			i++;
@@ -98,7 +98,7 @@ static int cmd_x(char *args)
 	}
 	else
 	{
-		printf("Wrong Address Format!");
+		printf("Wrong Address Format!\n");
 		return 0;
 	}
 	for (i = 0; i < n; i++)
