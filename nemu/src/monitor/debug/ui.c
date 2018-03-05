@@ -102,7 +102,7 @@ static int cmd_x(char *args)
 		printf("Wrong Address Format!\n");
 		return 0;
 	}
-	printf("  Address\t Hexadecimal\t\t Decimal\n");
+	printf("  Address\tHexadecimal\tDecimal\n");
 	for (i = 0; i < n; i++)
 	{
 		printf("0x%08x\t%x       \t%d\n", address + i * 4,paddr_read(address + i * 4, 4), paddr_read(address + i * 4, 4));
