@@ -46,7 +46,7 @@ static int cmd_si(char *args){
 	if (n == 0)n = 1;
 	else if (n < 0 && n != -1)
 	{
-		printf("You can only input numbers which are bigger than -1");
+		printf("You can only input numbers which are bigger than -1\n");
 		return 0;
 	}
 	cpu_exec(n);
