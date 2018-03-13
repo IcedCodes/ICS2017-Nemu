@@ -24,7 +24,11 @@ static struct rule {
 
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
-  {"==", TK_EQ}         // equal
+  {"==", TK_EQ},        // equal
+//  {"\\-", '-'},		//减
+//  {"\\*", '*'},		//乘
+//  {"\\/", '/'}.		//除i
+//  {"[0-9][1-8]",number}	//数字
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -78,7 +82,12 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
+/*	tokens[nr_token].type = rules[i].token_type;
+	for (int j = 0, j < substr_len, j++)
+	{
+		tokens[nr_token].str[j] = e[position - substr_len + j];
+	}
+	nr_token++; */
         switch (rules[i].token_type) {
           default: TODO();
         }
@@ -101,7 +110,13 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-
+/* else
+ {
+	 int result[32];
+	 char symbols[32];
+	 int i, a, b;
+	 
+ }*/
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
