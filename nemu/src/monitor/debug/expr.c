@@ -116,6 +116,7 @@ uint32_t expr(char *e, bool *success)
   }
  else
  {
+	*success = true;
 //	 int result[32];
 //	 int symbols[32];
 	 int i, b;
