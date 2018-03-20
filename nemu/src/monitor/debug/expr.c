@@ -1,4 +1,5 @@
 #include "nemu.h"
+#include <stdlib.h>
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -7,7 +8,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ
+  TK_NOTYPE = 256, TK_EQ, TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,
 
   /* TODO: Add more token types */
 
@@ -21,14 +22,13 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
-  {"==", TK_EQ},        // equal
-//  {"\\-", '-'},		//减
-//  {"\\*", '*'},		//乘
-//  {"\\/", '/'}.		//除i
-//  {"[0-9][1-8]",number}	//数字
+  {"\\+",TK_PLUS},         // plus
+  {"==", TK_EQUAL},        // equal
+  {"\\-",TK_MINUS},		//minus
+  {"\\*",TK_MULTIPLY},		//multiply
+  {"\\/",TK_DIVIDE},		//divide
+  {"[0-9][1-8]",TK_NUMBERS},	//numbers
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -62,15 +62,17 @@ int nr_token;
 
 static bool make_token(char *e) {
   int position = 0;
-  int i;
+  int i, j;
   regmatch_t pmatch;
 
   nr_token = 0;
 
   while (e[position] != '\0') {
     /* Try all rules one by one. */
-    for (i = 0; i < NR_REGEX; i ++) {
-      if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
+    for (i = 0; i < NR_REGEX; i ++) 
+    {
+      if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) 
+      {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
@@ -82,17 +84,17 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-/*	tokens[nr_token].type = rules[i].token_type;
-	for (int j = 0, j < substr_len, j++)
+	tokens[nr_token].type = rules[i].token_type;
+	for (j = 0; j < substr_len; j++)
 	{
 		tokens[nr_token].str[j] = e[position - substr_len + j];
 	}
-	nr_token++; */
-        switch (rules[i].token_type) {
+	nr_token++;
+/*        switch (rules[i].token_type) {
           default: TODO();
         }
-
-        break;
+*/
+	break;
       }
     }
 
@@ -105,20 +107,35 @@ static bool make_token(char *e) {
   return true;
 }
 
-uint32_t expr(char *e, bool *success) {
+uint32_t expr(char *e, bool *success) 
+{
+ int sum = 0;
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
-/* else
+ else
  {
-	 int result[32];
-	 char symbols[32];
-	 int i, a, b;
-	 
- }*/
+//	 int result[32];
+//	 int symbols[32];
+	 int i, b;
+	 b = 0;
+	 sum = atoi(tokens[0].str);
+	 for (i = 1; i < nr_token; i++)
+	 {
+		 if (tokens[i].type == TK_NUMBERS)
+		 {
+			if (b != 0)
+			{
+				sum += b;
+			}
+			else
+			{
+				b = 0;
+			}
+		 }
+	 }
+ }
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+  return sum;
 }
