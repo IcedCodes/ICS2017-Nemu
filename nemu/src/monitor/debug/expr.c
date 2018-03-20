@@ -28,7 +28,7 @@ static struct rule {
   {"\\-",TK_MINUS},		//minus
   {"\\*",TK_MULTIPLY},		//multiply
   {"\\/",TK_DIVIDE},		//divide
-  {"[0-9][1-8]",TK_NUMBERS},	//numbers
+  {"[0-9]+",TK_NUMBERS},	//numbers
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
