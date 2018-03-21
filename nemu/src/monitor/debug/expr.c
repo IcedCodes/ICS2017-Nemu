@@ -158,7 +158,7 @@ void divide()
 	data[a - 2] /= data[a - 1];
 	a--;
 }
-void POW()
+void CALCPOW()
 {
 	int calc = pow(data[a - 2], data[a - 1]);
 	data[a - 2] = calc;
@@ -195,7 +195,7 @@ bool solve(int type)
 		}
 		else if (operator[b - 1] == TK_POW)
 		{
-			POW();
+			CALCPOW();
 			operator[b - 1] = type;
 		}
 		else return false;
