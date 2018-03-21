@@ -35,6 +35,7 @@ static struct rule {
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
   {"\\*\\0\\x[0-9a-fA-f]{1,8}",TK_MEMORY},
+  {"\\^",TK_POW},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
