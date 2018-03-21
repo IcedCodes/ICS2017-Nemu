@@ -309,7 +309,28 @@ uint32_t expr(char *e, bool *success)
 		}
 	}
  }
- if (a == 0 && operator[0] == TK_NOTYPE)
+ if (a == 2 && b == 1)
+ {
+	 if (operator[0] == TK_PLUS)
+	 {
+		 data[0] += data[1];
+	 }
+	 if (operator[0] == TK_MINUS)
+	 {
+		 data[0] -= data[1];
+	 }
+	 if (operator[0] == TK_MULTIPLY)
+	 {
+		 data[0] *= data[1];
+	 }
+	 if (operator[0] == TK_DIVIDE)
+	 {
+		 data[0] /= data[1];
+	 }
+	 *success = true;
+	 return data[0];
+ }
+ else if(a == 0 && b == 2 && operator[0] == TK_LEFT && operator[1] ==TK_RIGHT)
  {
 	 *success = true;
 	 return data[0];
