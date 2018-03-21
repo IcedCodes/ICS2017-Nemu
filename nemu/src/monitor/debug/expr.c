@@ -204,6 +204,7 @@ uint32_t expr(char *e, bool *success)
 	operator[0] = TK_NOTYPE;
 	for (i = 0; i < nr_token; i++)
 	{
+		if (tokens[i].type ==TK_NOTYPE)continue;
 		if (tokens[i].type == TK_NUMBERS)
 		{
 			data[a] = atoi(tokens[i].str);
