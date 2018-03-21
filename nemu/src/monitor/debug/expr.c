@@ -1,14 +1,15 @@
 #include "nemu.h"
 #include <stdlib.h>
-
+#include <math.h>
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <sys/types.h>
 #include <regex.h>
-
+#include <memory/memory.h>
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,
+  TK_NOTYPE = 256, TK_EQ, TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,TK_POW,TK_LEFT,TK_RIGHT,TK_REG,
+  TK_MEMORY,TK_HEX,
 
   /* TODO: Add more token types */
 
@@ -29,6 +30,11 @@ static struct rule {
   {"\\*",TK_MULTIPLY},		//multiply
   {"\\/",TK_DIVIDE},		//divide
   {"[0-9]{1,8}",TK_NUMBERS},	//numbers
+  {"\\0\\x[0-9a-fA-F]{1,8}",TK_HEX},	//hex
+  {"($eax)|($ebx)|($ecx)|($edx)|($ebp)|($esi)|($edi)|($esp)|($eip)",TK_REG},
+  {"\\(",TK_LEFT},
+  {"\\)",TK_RIGHT},
+  {"\\*\\0\\x[0-9a-fA-f]{1,8}",TK_MEMORY},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -106,7 +112,96 @@ static bool make_token(char *e) {
 
   return true;
 }
-
+uint32_t HEX_to_DEC(char *arg)
+{
+	int i; 
+	uint32_t result;
+	i = 2;
+	result = 0;
+	while (arg[i] != '\n')
+	{
+		if (arg[i] <= '9' && arg[i] >= '0')
+		{
+			result += arg[i] - '0';
+		}
+		else if(arg[i] <= 'f' && arg[i] >= 'a')
+		{
+			result += arg[i] - 'a' + 10;
+		}
+		else if (arg[i] <= 'F' && arg[i] >= 'A')
+		{
+			result += arg[i] - 'A' + 10;
+		}
+	}
+	return result;
+}
+int data[32];
+int operator[32];
+int a, b;
+void plus()
+{
+	data[a - 2] += data[a - 1];
+	a--;
+}
+void minus()
+{
+	data[a - 2] -= data[a - 1];
+	a--;
+}
+void multiply()
+{
+	data[a - 2] *= data[a - 1];
+	a--;
+}
+void divide()
+{
+	data[a - 2] /= data[a - 1];
+	a--;
+}
+void POW()
+{
+	int calc = pow(data[a - 2], data[a - 1]);
+	data[a - 2] = calc;
+	a--;
+}
+bool solve(int type)
+{
+	if (type == TK_MULTIPLY || type == TK_DIVIDE || type == TK_POW)
+	{
+		operator[b] = type;
+		b++;
+	}
+	else if (type == TK_PLUS || type == TK_MINUS)
+	{
+		if (operator[b - 1] == TK_PLUS)
+		{
+			plus();
+			operator[b - 1] = type;
+		}
+		else if (operator[b - 1] == TK_MINUS)
+		{
+			minus();
+			operator[b - 1] = type;
+		}
+		else if (operator[b - 1] == TK_DIVIDE)
+		{
+			divide();
+			operator[b - 1] = type;
+		}
+		else if (operator[b - 1] == TK_MULTIPLY)
+		{
+			multiply();
+			operator[b - 1] = type;
+		}
+		else if (operator[b - 1] == TK_POW)
+		{
+			POW();
+			operator[b - 1] = type;
+		}
+		else return false;
+	}
+	return true;
+}
 uint32_t expr(char *e, bool *success) 
 {
  int sum = 0;
@@ -116,26 +211,123 @@ uint32_t expr(char *e, bool *success)
   }
  else
  {
-	*success = true;
-//	 int result[32];
-//	 int symbols[32];
-	 int i, b;
-	 b = 0;
-	 sum = atoi(tokens[0].str);
-	 for (i = 1; i < nr_token; i++)
-	 {
-		 if (tokens[i].type == TK_NUMBERS)
-		 {
-			if (b != 0)
+	a = b = 0;
+	int i;
+	operator[0] = TK_NOTYPE;
+	for (i = 0; i < nr_token; i++)
+	{
+		if (tokens[i].type == TK_NUMBERS)
+		{
+			data[a] = atoi(tokens[i].str);
+			a++;
+		}
+		else if (tokens[i].type == TK_HEX)
+		{
+			data[a] = HEX_to_DEC(tokens[i].str);
+			a++;
+		}
+		else if (tokens[i].type == TK_LEFT)
+		{
+			operator[b] = TK_LEFT;
+		}
+		else if (tokens[i].type == TK_RIGHT)
+		{
+			if (b == 0 || operator[b - 1] != TK_LEFT)
 			{
-				sum += b;
+				*success = false;
+				return 0;
 			}
 			else
 			{
-				b = 0;
+				b--;	//pop
+				if (b == 0)
+				{
+					operator[b] = TK_NOTYPE;
+				}
 			}
-		 }
-	 }
+		}
+		else if (tokens[i].type == TK_REG)
+		{
+			if (strcmp(tokens[i].str,"$eax")== 0)
+			{
+				data[a] = cpu.eax;
+				a++;
+			}
+			if (strcmp(tokens[i].str,"$ebx")== 0)
+			{
+				data[a] = cpu.ebx;
+				a++;
+			}
+			if (strcmp(tokens[i].str,"$ecx")== 0)
+			{
+				data[a] = cpu.eax;
+				a++;
+			}
+			if (strcmp(tokens[i].str,"$edx")== 0)
+			{
+				data[a] = cpu.edx;
+				a++;
+			}
+			if (strcmp(tokens[i].str,"$ebp")== 0)
+			{
+				data[a] = cpu.eax;
+				a++;
+			}
+			if (strcmp(tokens[i].str,"$esi")== 0)
+			{
+				data[a] = cpu.esi;
+				a++;
+			}
+			if (strcmp(tokens[i].str,"$edi")== 0)
+			{
+				data[a] = cpu.edi;
+				a++;
+			}
+			if (strcmp(tokens[i].str,"$esp")== 0)
+			{
+				data[a] = cpu.esp;
+				a++;
+			}
+			if (strcmp(tokens[i].str,"$eip")== 0)
+			{
+				data[a] = cpu.eip;
+				a++;
+			}
+
+		}
+		if (tokens[i].type == TK_HEX)
+		{
+			data[a] = HEX_to_DEC(tokens[i].str);
+			a++;
+		}
+		if (tokens[i].type == TK_MEMORY)
+		{
+			data[a] = paddr_read(HEX_to_DEC(tokens[i].str), 4);
+			a++;
+		}
+		else
+		{
+			if (a == 0 && b!= 0)
+			{
+				*success = false;
+				return 0;
+			}
+			if(solve(tokens[i].type) == false)
+			{
+				*success = false;
+				return 0;
+			}
+		}
+	}
+ }
+ if (a == 0 && operator[0] == TK_NOTYPE)
+ {
+	 *success = true;
+	 return data[0];
+ }
+ else 
+ {
+	 *success =false;
  }
   /* TODO: Insert codes to evaluate the expression. */
   return sum;
