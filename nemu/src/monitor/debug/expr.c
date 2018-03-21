@@ -1,6 +1,5 @@
 #include "nemu.h"
 #include <stdlib.h>
-#include <math.h>
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
@@ -8,7 +7,7 @@
 #include <regex.h>
 #include <memory/memory.h>
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,TK_POW,TK_LEFT,TK_RIGHT,TK_REG,
+  TK_NOTYPE = 256, TK_EQ, TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,TK_LEFT,TK_RIGHT,TK_REG,
   TK_MEMORY,TK_HEX,
 
   /* TODO: Add more token types */
@@ -35,7 +34,6 @@ static struct rule {
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
   {"\\*\\0\\x[0-9a-fA-f]{1,8}",TK_MEMORY},
-  {"\\^",TK_POW},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -159,15 +157,9 @@ void divide()
 	data[a - 2] /= data[a - 1];
 	a--;
 }
-void CALCPOW()
-{
-	int calc = pow(data[a - 2], data[a - 1]);
-	data[a - 2] = calc;
-	a--;
-}
 bool solve(int type)
 {
-	if (type == TK_MULTIPLY || type == TK_DIVIDE || type == TK_POW)
+	if (type == TK_MULTIPLY || type == TK_DIVIDE)
 	{
 		operator[b] = type;
 		b++;
@@ -192,11 +184,6 @@ bool solve(int type)
 		else if (operator[b - 1] == TK_MULTIPLY)
 		{
 			multiply();
-			operator[b - 1] = type;
-		}
-		else if (operator[b - 1] == TK_POW)
-		{
-			CALCPOW();
 			operator[b - 1] = type;
 		}
 		else return false;
