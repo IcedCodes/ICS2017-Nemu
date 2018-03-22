@@ -199,6 +199,7 @@ uint32_t expr(char *e, bool *success)
   }
  else
  {
+	printf("Successfully match!\n");
 	a = b = 0;
 	int i;
 	operator[0] = TK_NOTYPE;
@@ -309,6 +310,7 @@ uint32_t expr(char *e, bool *success)
 		}
 	}
  }
+ printf("Finish Calculating!\n");
  if (a == 2 && b == 1)
  {
 	 if (operator[0] == TK_PLUS)
