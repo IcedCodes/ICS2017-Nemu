@@ -163,6 +163,7 @@ bool solve(int type)
 	{
 		operator[0] = type;
 		b++;
+		printf("b == 0!");
 	}
 	else if (type == TK_MULTIPLY || type == TK_DIVIDE)
 	{
@@ -335,7 +336,7 @@ uint32_t expr(char *e, bool *success)
 	 *success = true;
 	 return data[0];
  }
- else if(a == 0 && b == 2 && operator[0] == TK_LEFT && operator[1] ==TK_RIGHT)
+ else if((a == 0 && b == 2 && operator[0] == TK_LEFT && operator[1] == TK_RIGHT) || a == 0)
  {
 	 *success = true;
 	 return data[0];
