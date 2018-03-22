@@ -159,7 +159,12 @@ void divide()
 }
 bool solve(int type)
 {
-	if (type == TK_MULTIPLY || type == TK_DIVIDE)
+	if (b == 0)
+	{
+		operator[0] = type;
+		b++;
+	}
+	else if (type == TK_MULTIPLY || type == TK_DIVIDE)
 	{
 		operator[b] = type;
 		b++;
@@ -199,7 +204,6 @@ uint32_t expr(char *e, bool *success)
   }
  else
  {
-	printf("Successfully match!\n");
 	a = b = 0;
 	int i;
 	operator[0] = TK_NOTYPE;
@@ -310,7 +314,6 @@ uint32_t expr(char *e, bool *success)
 		}
 	}
  }
- printf("Finish Calculating!\n");
  if (a == 2 && b == 1)
  {
 	 if (operator[0] == TK_PLUS)
