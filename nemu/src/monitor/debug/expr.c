@@ -211,6 +211,7 @@ uint32_t expr(char *e, bool *success)
 	for (i = 0; i < nr_token; i++)
 	{
 		printf("i = %d\n", i);
+		printf("a = %d, b = %d\n" ,a, b);
 		if (tokens[i].type ==TK_NOTYPE)continue;
 		if (tokens[i].type == TK_NUMBERS)
 		{
