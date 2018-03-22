@@ -163,7 +163,6 @@ bool solve(int type)
 	{
 		operator[0] = type;
 		b++;
-		printf("b = 0!\n");
 	}
 	else if (type == TK_MULTIPLY || type == TK_DIVIDE)
 	{
@@ -210,14 +209,11 @@ uint32_t expr(char *e, bool *success)
 	operator[0] = TK_NOTYPE;
 	for (i = 0; i < nr_token; i++)
 	{
-		printf("i = %d\n", i);
-		printf("a = %d, b = %d\n" ,a, b);
 		if (tokens[i].type ==TK_NOTYPE)continue;
 		if (tokens[i].type == TK_NUMBERS)
 		{
 			data[a] = atoi(tokens[i].str);
 			a++;
-			printf("%d in data",data[a - 1]);
 		}
 		else if (tokens[i].type == TK_HEX)
 		{
@@ -308,13 +304,11 @@ uint32_t expr(char *e, bool *success)
 			if (a == 0 && b!= 0)
 			{
 				*success = false;
-				printf("a == 0 && b!= 0\n");
 				return 0;
 			}
 			if(solve(tokens[i].type) == false)
 			{
 				*success = false;
-				printf("Solve failure!\n");
 				return 0;
 			}
 		}
