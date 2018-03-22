@@ -314,7 +314,6 @@ uint32_t expr(char *e, bool *success)
 		}
 	}
  }
- printf("a: %d b: %d\n",a,b);
  if (a == 2 && b == 1)
  {
 	 if (operator[0] == TK_PLUS)
