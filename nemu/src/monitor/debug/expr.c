@@ -163,7 +163,7 @@ bool solve(int type)
 	{
 		operator[0] = type;
 		b++;
-		printf("b == 0!");
+		printf("b == 0!\n");
 	}
 	else if (type == TK_MULTIPLY || type == TK_DIVIDE)
 	{
@@ -315,6 +315,7 @@ uint32_t expr(char *e, bool *success)
 		}
 	}
  }
+ printf("a: %d b: %d\n",a,b);
  if (a == 2 && b == 1)
  {
 	 if (operator[0] == TK_PLUS)
