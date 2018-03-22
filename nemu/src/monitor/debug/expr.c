@@ -217,6 +217,7 @@ uint32_t expr(char *e, bool *success)
 		{
 			data[a] = atoi(tokens[i].str);
 			a++;
+			printf("%d in data",data[a - 1]);
 		}
 		else if (tokens[i].type == TK_HEX)
 		{
@@ -292,12 +293,12 @@ uint32_t expr(char *e, bool *success)
 			}
 
 		}
-		if (tokens[i].type == TK_HEX)
+		else if (tokens[i].type == TK_HEX)
 		{
 			data[a] = HEX_to_DEC(tokens[i].str);
 			a++;
 		}
-		if (tokens[i].type == TK_MEMORY)
+		else if (tokens[i].type == TK_MEMORY)
 		{
 			data[a] = paddr_read(HEX_to_DEC(tokens[i].str), 4);
 			a++;
