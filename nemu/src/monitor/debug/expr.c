@@ -305,11 +305,13 @@ uint32_t expr(char *e, bool *success)
 			if (a == 0 && b!= 0)
 			{
 				*success = false;
+				printf("a == 0 && b!= 0\n");
 				return 0;
 			}
 			if(solve(tokens[i].type) == false)
 			{
 				*success = false;
+				printf("Solve failure!\n");
 				return 0;
 			}
 		}
