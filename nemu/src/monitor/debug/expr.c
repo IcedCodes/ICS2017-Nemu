@@ -335,7 +335,7 @@ uint32_t expr(char *e, bool *success)
 	 *success = true;
 	 return data[0];
  }
- else if((a == 0 && b == 2 && operator[0] == TK_LEFT && operator[1] == TK_RIGHT) || a == 0)
+ else if((a == 1 && b == 2 && operator[0] == TK_LEFT && operator[1] == TK_RIGHT) || a == 1)
  {
 	 *success = true;
 	 return data[0];
