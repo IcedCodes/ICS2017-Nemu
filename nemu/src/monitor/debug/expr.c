@@ -33,7 +33,7 @@ static struct rule {
   {"($eax)|($ebx)|($ecx)|($edx)|($ebp)|($esi)|($edi)|($esp)|($eip)",TK_REG},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
-  {"\\*\\0\\x[0-9a-fA-f]{1,8}",TK_MEMORY},
+  {"\\*0x[0-9a-fA-f]{1,8}",TK_MEMORY},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
