@@ -29,7 +29,7 @@ static struct rule {
   {"\\*",TK_MULTIPLY},		//multiply
   {"\\/",TK_DIVIDE},		//divide
   {"[0-9]{1,8}",TK_NUMBERS},	//numbers
-  {"\\0\\x[0-9a-fA-F]{1,8}",TK_HEX},	//hex
+  {"(0x)[0-9a-fA-F]{1,8}",TK_HEX},	//hex
   {"(\\$eax)|(\\$ebx)|(\\$ecx)|(\\$edx)|(\\$ebp)|(\\$esi)|(\\$edi)|(\\$esp)|(\\$eip)]",TK_REG},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
@@ -77,12 +77,12 @@ static bool make_token(char *e) {
     {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) 
       {
-        char *substr_start = e + position;
+        //char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+       /* Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
-        position += substr_len;
+        position += substr_len;*/
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
@@ -235,7 +235,6 @@ uint32_t expr(char *e, bool *success)
 	}
 	a = b = 0;
 	operator[0] = TK_NOTYPE;
-	printf("i: %d\n",i);
 	for (i = 0; i < nr_token; i++)
 	{
 		if (tokens[i].type ==TK_NOTYPE)continue;
