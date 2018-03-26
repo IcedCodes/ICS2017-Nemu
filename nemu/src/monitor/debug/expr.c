@@ -30,7 +30,7 @@ static struct rule {
   {"\\/",TK_DIVIDE},		//divide
   {"[0-9]{1,8}",TK_NUMBERS},	//numbers
   {"\\0\\x[0-9a-fA-F]{1,8}",TK_HEX},	//hex
-  {"[$eax|$ebx|$ecx|$edx|$ebp|$esi|$edi|$esp|$eip]",TK_REG},
+  {"(\\$eax)|(\\$ebx)|(\\$ecx)|(\\$edx)|(\\$ebp)|(\\$esi)|(\\$edi)|(\\$esp)|(\\$eip)]",TK_REG},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
 };
@@ -220,6 +220,18 @@ uint32_t expr(char *e, bool *success)
 	for (i = 0; i < nr_token; i++)
 	{
 		if (tokens[i].type == TK_MULTIPLY && i == 0 && tokens[i + 1].type == TK_HEX)tokens[i].type = TK_MEMORY;
+		else if(tokens[i].type == TK_MULTIPLY && tokens[i - 1].type == TK_RIGHT && tokens[i + 1].type == TK_RIGHT)
+		{
+			tokens[i].type = TK_MULTIPLY;
+		}
+		else if(tokens[i].type == TK_MULTIPLY && tokens[i - 1].type == TK_NUMBERS && tokens[i + 1].type == TK_NUMBERS)
+		{
+			tokens[i].type = TK_MULTIPLY;
+		}
+		else if (tokens[i].type == TK_MULTIPLY)
+		{
+			tokens[i].type = TK_MEMORY;
+		}
 	}
 	a = b = 0;
 	operator[0] = TK_NOTYPE;
@@ -263,7 +275,6 @@ uint32_t expr(char *e, bool *success)
 			{
 				data[a] = cpu.eax;
 				a++;
-				printf("eax\n");
 			}
 			if (strcmp(tokens[i].str,"$ebx")== 0)
 			{
@@ -309,8 +320,62 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_MEMORY)
 		{
-			data[a] = paddr_read(HEX_to_DEC(tokens[++i].str), 4);
-			a++;
+			if (tokens[i + 1].str[0]=='0' && tokens[i+1].str[1]=='x')
+			{
+
+				data[a] = paddr_read(HEX_to_DEC(tokens[++i].str), 4);
+				a++;
+			}
+			else
+			{
+				i++;
+				if (strcmp(tokens[i].str,"$eax")== 0)
+				{
+					data[a] = cpu.eax;
+					a++;
+				}
+				if (strcmp(tokens[i].str,"$ebx")== 0)
+				{
+					data[a] = cpu.ebx;
+					a++;
+				}
+				if (strcmp(tokens[i].str,"$ecx")== 0)
+				{
+					data[a] = cpu.eax;
+					a++;
+				}
+				if (strcmp(tokens[i].str,"$edx")== 0)
+				{
+					data[a] = cpu.edx;
+					a++;
+				}
+				if (strcmp(tokens[i].str,"$ebp")== 0)
+				{
+					data[a] = cpu.eax;
+					a++;
+				}
+				if (strcmp(tokens[i].str,"$esi")== 0)
+				{
+					data[a] = cpu.esi;
+					a++;
+				}
+				if (strcmp(tokens[i].str,"$edi")== 0)
+				{
+					data[a] = cpu.edi;
+					a++;
+				}
+				if (strcmp(tokens[i].str,"$esp")== 0)
+				{
+					data[a] = cpu.esp;
+					a++;
+				}
+				if (strcmp(tokens[i].str,"$eip")== 0)
+				{
+					data[a] = cpu.eip;
+					a++;
+				}
+
+			}
 		}
 		else
 		{
