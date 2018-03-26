@@ -165,6 +165,16 @@ bool solve(int type)
 	}
 	else if (type == TK_MULTIPLY || type == TK_DIVIDE)
 	{
+		if (operator[b - 1] == TK_DIVIDE)
+		{
+			divide();
+			operator[b - 1] = type;
+		}
+		else if (operator[b - 1] == TK_MULTIPLY)
+		{
+			multiply();
+			operator[b - 1] = type;
+		}
 		operator[b] = type;
 		b++;
 	}
