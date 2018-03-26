@@ -30,7 +30,7 @@ static struct rule {
   {"\\/",TK_DIVIDE},		//divide
   {"[0-9]{1,8}",TK_NUMBERS},	//numbers
   {"\\0\\x[0-9a-fA-F]{1,8}",TK_HEX},	//hex
-  {"($eax)|($ebx)|($ecx)|($edx)|($ebp)|($esi)|($edi)|($esp)|($eip)",TK_REG},
+  {"$eax|$ebx|$ecx|$edx|$ebp|$esi|$edi|$esp|$eip",TK_REG},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
 };
@@ -312,26 +312,43 @@ uint32_t expr(char *e, bool *success)
 		}
 	}
  }
- if (a == 2 && b == 1)
+ if (a != 1 && b!= 0)
  {
-	 if (operator[0] == TK_PLUS)
+	 while (a != 1 && b!= 0)
 	 {
-		 data[0] += data[1];
+
+		 if (operator[b - 1] == TK_PLUS)
+		 {
+			 data[a - 2] += data[a - 1];
+			 b--;
+			 a--;
+		 }
+		 else if (operator[b - 1] == TK_MINUS)
+		 {
+			 data[a - 2] -= data[a - 1];
+			 b--;
+			 a--;
+		 }
+		 else if (operator[b - 1] == TK_MULTIPLY)
+		 {
+			 data[a - 2] *= data[a - 1];
+		 }
+		 else if (operator[b- 1] == TK_DIVIDE)
+	       	 {
+			 data[a - 2] /= data[a - 1];
+		 }
 	 }
-	 if (operator[0] == TK_MINUS)
+	 if (a == 1 && b == 0)
 	 {
-		 data[0] -= data[1];
+
+	 	*success = true;
+	 	return data[0];
 	 }
-	 if (operator[0] == TK_MULTIPLY)
+	 else
 	 {
-		 data[0] *= data[1];
+		*success = false;
+		return 0;
 	 }
-	 if (operator[0] == TK_DIVIDE)
-	 {
-		 data[0] /= data[1];
-	 }
-	 *success = true;
-	 return data[0];
  }
  else if((a == 1 && b == 2 && operator[0] == TK_LEFT && operator[1] == TK_RIGHT) || a == 1)
  {
