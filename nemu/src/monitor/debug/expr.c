@@ -175,8 +175,11 @@ bool solve(int type)
 			multiply();
 			operator[b - 1] = type;
 		}
-		operator[b] = type;
-		b++;
+		else
+		{
+			operator[b] = type;
+			b++;
+		}
 	}
 	else if (type == TK_PLUS || type == TK_MINUS)
 	{
