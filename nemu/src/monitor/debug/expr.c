@@ -33,7 +33,6 @@ static struct rule {
   {"($eax)|($ebx)|($ecx)|($edx)|($ebp)|($esi)|($edi)|($esp)|($eip)",TK_REG},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
-  {"\\*0x[0-9a-fA-f]{1,8}",TK_MEMORY},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -204,8 +203,12 @@ uint32_t expr(char *e, bool *success)
   }
  else
  {
+	 int i;
+	for (i = 0; i < nr_token; i++)
+	{
+		if (tokens[i].type == TK_MULTIPLY && i == 0 && tokens[i + 1].type == TK_HEX)tokens[i].type = TK_MEMORY;
+	}
 	a = b = 0;
-	int i;
 	operator[0] = TK_NOTYPE;
 	for (i = 0; i < nr_token; i++)
 	{
@@ -289,14 +292,9 @@ uint32_t expr(char *e, bool *success)
 			}
 
 		}
-		else if (tokens[i].type == TK_HEX)
-		{
-			data[a] = HEX_to_DEC(tokens[i].str);
-			a++;
-		}
 		else if (tokens[i].type == TK_MEMORY)
 		{
-			data[a] = paddr_read(HEX_to_DEC(tokens[i].str), 4);
+			data[a] = paddr_read(HEX_to_DEC(tokens[++i].str), 4);
 			a++;
 		}
 		else
