@@ -223,6 +223,7 @@ uint32_t expr(char *e, bool *success)
 	}
 	a = b = 0;
 	operator[0] = TK_NOTYPE;
+	printf("i: %d\n",i);
 	for (i = 0; i < nr_token; i++)
 	{
 		if (tokens[i].type ==TK_NOTYPE)continue;
