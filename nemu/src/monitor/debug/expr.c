@@ -28,9 +28,9 @@ static struct rule {
   {"\\-",TK_MINUS},		//minus
   {"\\*",TK_MULTIPLY},		//multiply
   {"\\/",TK_DIVIDE},		//divide
+  {"(\\$eax)|(\\$ebx)|(\\$ecx)|(\\$edx)|(\\$ebp)|(\\$esi)|(\\$edi)|(\\$esp)|(\\$eip)",TK_REG},
   {"[0-9]{1,8}",TK_NUMBERS},	//numbers
   {"\\b0[xX][0-9a-fA-F]{1,8}",TK_HEX},	//hex
-  {"(\\$eax)|(\\$ebx)|(\\$ecx)|(\\$edx)|(\\$ebp)|(\\$esi)|(\\$edi)|(\\$esp)|(\\$eip)]",TK_REG},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
 };
