@@ -30,7 +30,7 @@ static struct rule {
   {"\\/",TK_DIVIDE},		//divide
   {"[0-9]{1,8}",TK_NUMBERS},	//numbers
   {"\\0\\x[0-9a-fA-F]{1,8}",TK_HEX},	//hex
-  {"$eax|$ebx|$ecx|$edx|$ebp|$esi|$edi|$esp|$eip",TK_REG},
+  {"[$eax|$ebx|$ecx|$edx|$ebp|$esi|$edi|$esp|$eip]",TK_REG},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
 };
