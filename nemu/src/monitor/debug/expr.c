@@ -332,10 +332,14 @@ uint32_t expr(char *e, bool *success)
 		 else if (operator[b - 1] == TK_MULTIPLY)
 		 {
 			 data[a - 2] *= data[a - 1];
+			 b--;
+			 a--;
 		 }
 		 else if (operator[b- 1] == TK_DIVIDE)
 	       	 {
 			 data[a - 2] /= data[a - 1];
+			 b--;
+			 a--;
 		 }
 	 }
 	 if (a == 1 && b == 0)
