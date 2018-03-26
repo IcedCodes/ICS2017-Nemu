@@ -262,6 +262,7 @@ uint32_t expr(char *e, bool *success)
 			{
 				data[a] = cpu.eax;
 				a++;
+				printf("eax\n");
 			}
 			if (strcmp(tokens[i].str,"$ebx")== 0)
 			{
