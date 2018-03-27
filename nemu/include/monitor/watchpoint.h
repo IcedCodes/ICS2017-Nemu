@@ -7,7 +7,7 @@ typedef struct watchpoint {
   int NO;
   int value;
   struct watchpoint *next;
-  char *expression;
+  char expression[32];
   bool busy;
 } WP;
 WP* new_wp(char *args);

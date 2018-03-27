@@ -27,7 +27,7 @@ WP* new_wp(char *args)
 	{
 		free_ = p->next;
 		p -> next = NULL;
-		p->expression = args;
+		strcpy(p->expression, args);
 		p->busy = true;
 		WP *q = head;
 		if (q == NULL)
@@ -53,7 +53,7 @@ WP* new_wp(char *args)
 		{
 			p->next = q->next;	//relink
 			q->next = NULL;
-			q->expression = args;
+			strcpy(q->expression, args);
 			q->busy = true;
 			p = head;
 			if (p == NULL)
@@ -150,7 +150,7 @@ void show()
 	printf("NO \t Value\t\t Expression\n");
 	while(p != NULL)
 	{
-		printf("%d \t%d\t %s\n",p->NO,p->value,p->expression);
+		printf("%d \t%d\t\t %s\n",p->NO,p->value,p->expression);
 		p = p->next;
 	}
 }
