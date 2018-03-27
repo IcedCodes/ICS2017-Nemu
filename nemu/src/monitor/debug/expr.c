@@ -267,14 +267,14 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_RIGHT)
 		{
+			if (i >= 1 && operator[i - 1] == TK_LEFT)
+			{
+				b--;
+			}
 			if (b == 0 || operator[b - 2] != TK_LEFT)
 			{
 				*success = false;
 				return 0;
-			}
-			else if (operator[b - 1] == TK_LEFT)
-			{
-				b--;
 			}
 			else
 			{
@@ -296,6 +296,7 @@ uint32_t expr(char *e, bool *success)
 				}
 				b--;
 				b--;	//pop Left
+				printf("b = %d\n", b);
 				if (b == 0)
 				{
 					operator[b] = TK_NOTYPE;
