@@ -467,6 +467,11 @@ uint32_t expr(char *e, bool *success)
 		return 0;
 	 }
  }
+ else if (a == 1 && b == 0)
+ {
+	 *success = true;
+	 return 0;
+ }
  else if((a == 1 && b == 2 && operator[0] == TK_LEFT && operator[1] == TK_RIGHT) || a == 1)
  {
 	 *success = true;
