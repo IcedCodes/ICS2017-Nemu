@@ -272,7 +272,7 @@ uint32_t expr(char *e, bool *success)
 			{
 				b--;
 			}
-			if (b == 0 || operator[b - 2] != TK_LEFT)
+			else if (b == 0 || operator[b - 2] != TK_LEFT)
 			{
 				*success = false;
 				return 0;
