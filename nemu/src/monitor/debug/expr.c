@@ -252,8 +252,10 @@ uint32_t expr(char *e, bool *success)
 		if (tokens[i].type ==TK_NOTYPE)continue;
 		if (tokens[i].type == TK_NUMBERS)
 		{
+
 			data[a] = atoi(tokens[i].str);
 			a++;
+			printf("a = %d\n",a);
 		}
 		else if (tokens[i].type == TK_HEX)
 		{
