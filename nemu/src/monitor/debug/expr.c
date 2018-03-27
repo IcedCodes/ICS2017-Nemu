@@ -247,7 +247,6 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_HEX)
 		{
-			printf("%s\n", tokens[i].str);
 			data[a] = HEX_to_DEC(tokens[i].str);
 			a++;
 		}
@@ -257,14 +256,31 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_RIGHT)
 		{
-			if (b == 0 || operator[b - 1] != TK_LEFT)
+			if (b == 0 || operator[b - 2] != TK_LEFT)
 			{
 				*success = false;
 				return 0;
 			}
 			else
 			{
-				b--;	//pop
+				b--;
+				if (operator[b - 1] == TK_PLUS)
+				{
+					plus();
+				}
+				else if (operator[b - 1] == TK_MINUS)
+				{
+					minus();
+				}
+				else if (operator[b - 1] == TK_DIVIDE)
+				{
+					divide();
+				}
+				else if (operator[b - 1] == TK_MULTIPLY)
+				{
+					multiply();
+				}
+				b--;	//pop Left
 				if (b == 0)
 				{
 					operator[b] = TK_NOTYPE;
