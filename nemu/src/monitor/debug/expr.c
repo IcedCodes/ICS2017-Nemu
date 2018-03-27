@@ -425,10 +425,9 @@ uint32_t expr(char *e, bool *success)
 			}
 		}
 	}
- }
+	printf("a = %d\nb = %d\n",a ,b);
  if (a != 1 && b!= 0)
  {
-	 printf("a = %d\nb = %d\n",a ,b);
 	 while (a != 1 && b!= 0)
 	 {
 
@@ -485,4 +484,5 @@ uint32_t expr(char *e, bool *success)
  }
   /* TODO: Insert codes to evaluate the expression. */
   return sum;
+}
 }
