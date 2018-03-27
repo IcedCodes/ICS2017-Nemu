@@ -296,6 +296,7 @@ uint32_t expr(char *e, bool *success)
 				}
 				b--;
 				b--;	//pop Left
+				printf("a = %d\n", a);
 				printf("b = %d\n", b);
 				if (b == 0)
 				{
