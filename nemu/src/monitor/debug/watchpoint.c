@@ -18,13 +18,14 @@ void init_wp_pool() {
   head = NULL;
   free_ = wp_pool;
 }
-WP* new_wp()
+WP* new_wp(char *args)
 {
 	WP *p = free_;
 	if (free_->busy == false)
 	{
 		free_ = p->next;
 		p -> next = NULL;
+		p->expression = args;
 		return p;
 	}
 	WP *q;
@@ -35,6 +36,7 @@ WP* new_wp()
 		{
 			p->next = q->next;	//relink
 			q->next = NULL;
+			q->expression = args;
 			return q;
 		}
 		else
@@ -47,11 +49,11 @@ WP* new_wp()
 	return NULL;
 
 }
-void free_wp(WP *wp)
+void free_wp(int num)
 {
 	WP *p, *q, *r;
 	p = head;
-	if (p == wp)
+	if (p->NO == num)
 	{
 		q = p;
 		head = p->next;
@@ -61,7 +63,7 @@ void free_wp(WP *wp)
 		q = head->next;
 		while (q != NULL)
 		{
-			if (q == wp)
+			if (q->NO == num)
 			{
 				p ->next = q->next;
 			}
@@ -71,6 +73,11 @@ void free_wp(WP *wp)
 				q= q->next;
 			}
 		}
+	}
+	if (q == NULL)
+	{
+		printf("There is no such watchpoint!\n");
+		return;
 	}
 	p = free_;
 	if (p->NO > q->NO)

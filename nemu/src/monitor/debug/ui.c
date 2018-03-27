@@ -71,6 +71,10 @@ static int cmd_info(char* args)
 		printf("esp: 0x%08x\t\t%d\n", cpu.esp, cpu.esp);
 		printf("eip: 0x%08x\t\t%d\n", cpu.eip, cpu.eip);
 	}
+	else if(strcmp(arg, "w") == 0)
+	{
+		show();
+	}
 	return 0;
 }
 
@@ -130,6 +134,25 @@ static int cmd_p(char *args)
 	return 0;
 }
 
+static int cmd_w(char *args)
+{
+	bool *success = false;
+	expr(args, success);
+	if (success)
+	{
+		new_wp(args);
+	}
+	else printf("Wrong expression!\n");
+	return 0;
+}
+
+static int cmd_d(char *args)
+{
+	int num = atoi(args);
+	free_wp(num);
+	return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -141,7 +164,9 @@ static struct {
   {"si", "step by step n times", cmd_si},
   {"info","printf the infomation of registers or watchpoints\n\t-r show the infomation of the 9 regsisters",cmd_info},
   {"x","Scan Memory\n\t - n adress :scan n bytes from adress",cmd_x},
-  {"p", "Print the result of an expression.", cmd_p},
+  {"p", "Print the result of an expression.\n", cmd_p},
+  {"w", "Build a new watchpoint\n", cmd_w},
+  {"d", "Delete a watchpoint by NO.\n", cmd_d},
   /* TODO: Add more commands */
 
 };

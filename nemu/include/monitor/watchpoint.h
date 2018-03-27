@@ -10,8 +10,8 @@ typedef struct watchpoint {
   char *expression;
   bool busy;
 } WP;
-WP* new_wp();
-void free_wp(WP *wp);
+WP* new_wp(char *args);
+void free_wp(int num);
 void show();
 WP* checkchange();
 #endif
