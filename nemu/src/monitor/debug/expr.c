@@ -428,6 +428,7 @@ uint32_t expr(char *e, bool *success)
  }
  if (a != 1 && b!= 0)
  {
+	 printf("a = %d\nb = %d\n",a ,b);
 	 while (a != 1 && b!= 0)
 	 {
 
