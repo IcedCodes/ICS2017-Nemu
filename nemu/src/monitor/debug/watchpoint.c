@@ -147,7 +147,7 @@ void show()
 		printf("There is no watchpoint!\n");
 		return;
 	}
-	printf("NO \t Value\t Expression\n");
+	printf("NO \t Value\t\t Expression\n");
 	while(p != NULL)
 	{
 		printf("%d \t%d\t %s\n",p->NO,p->value,p->expression);
