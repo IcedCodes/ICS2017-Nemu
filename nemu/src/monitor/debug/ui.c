@@ -162,7 +162,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   {"si", "step by step n times", cmd_si},
-  {"info","printf the infomation of registers or watchpoints\n\t-r show the infomation of the 9 regsisters",cmd_info},
+  {"info","printf the infomation of registers or watchpoints\n\t-r show the infomation of the 9 regsisters\n\t -w show the infomation of the watchpoints\n",cmd_info},
   {"x","Scan Memory\n\t - n adress :scan n bytes from adress",cmd_x},
   {"p", "Print the result of an expression.\n", cmd_p},
   {"w", "Build a new watchpoint\n", cmd_w},
