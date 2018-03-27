@@ -142,7 +142,7 @@ static int cmd_w(char *args)
 	{
 		WP *p = new_wp(args);
 		printf("Successfully create a new watchpoint!\n");
-		printf("NO: %d\t Value: %d\t Expression:%s\n",p->NO,p->value,p->expression);
+		printf("NO: %d\t Value: %d\t Expression: %s\n",p->NO,p->value,p->expression);
 	}
 	else printf("Wrong expression!\n");
 	return 0;

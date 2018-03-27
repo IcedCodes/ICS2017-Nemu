@@ -21,6 +21,7 @@ void init_wp_pool() {
 
 WP* new_wp(char *args)
 {
+	bool success;
 	WP *p = free_;
 	if (free_->busy == false)
 	{
@@ -41,6 +42,7 @@ WP* new_wp(char *args)
 			}
 			q->next = p;
 		}
+		p->value = expr(args, &success);
 		return p;
 	}
 	WP *q;
@@ -63,6 +65,7 @@ WP* new_wp(char *args)
 				while(p->next != NULL)p = p->next;
 				p->next = q;
 			}
+			q->value = expr(args, &success);
 			return q;
 		}
 		else
