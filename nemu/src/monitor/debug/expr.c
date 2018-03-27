@@ -267,7 +267,6 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_RIGHT)
 		{
-			printf("%d\n", b);
 			if (b == 0 || operator[b - 2] != TK_LEFT)
 			{
 				*success = false;
@@ -279,8 +278,6 @@ uint32_t expr(char *e, bool *success)
 			}
 			else
 			{
-				printf("OK\n");
-				b--;
 				if (operator[b - 1] == TK_PLUS)
 				{
 					plus();
@@ -297,6 +294,7 @@ uint32_t expr(char *e, bool *success)
 				{
 					multiply();
 				}
+				b--;
 				b--;	//pop Left
 				if (b == 0)
 				{
