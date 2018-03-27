@@ -172,7 +172,7 @@ bool solve(int type)
 			operator[b] = type;
 			b++;
 		}
-		if (operator[b - 1] == TK_DIVIDE)
+		else if (operator[b - 1] == TK_DIVIDE)
 		{
 			divide();
 			operator[b - 1] = type;
@@ -195,7 +195,7 @@ bool solve(int type)
 			operator[b] = type;
 			b++;
 		}
-		if (operator[b - 1] == TK_PLUS)
+		else if (operator[b - 1] == TK_PLUS)
 		{
 			plus();
 			operator[b - 1] = type;
