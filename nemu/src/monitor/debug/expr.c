@@ -268,7 +268,7 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_RIGHT)
 		{
-			if (i >= 1 && operator[i - 1] == TK_LEFT)
+			if (b >= 1 && operator[b - 1] == TK_LEFT)
 			{
 				b--;
 			}
