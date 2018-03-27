@@ -157,12 +157,13 @@ void show()
 
 WP* checkchange()
 {
+	printf("Start Checkchange\n");
 	WP* p;
 	p = head;
-	bool *success = false;
+	bool success = false;
 	while (p != NULL)
 	{
-		if (p->value != expr(p->expression,success))return p;
+		if (p->value != expr(p->expression, &success))return p;
 		p = p->next;
 	}
 	return NULL;
