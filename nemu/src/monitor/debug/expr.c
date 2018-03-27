@@ -116,7 +116,7 @@ uint32_t HEX_to_DEC(char *arg)
 	uint32_t result;
 	i = 2;
 	result = 0;
-	while (arg[i] != '\n')
+	while (arg[i] != '\0')
 	{
 		if (arg[i] <= '9' && arg[i] >= '0')
 		{
@@ -245,6 +245,7 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_HEX)
 		{
+			printf("%s\n", tokens[i].str);
 			data[a] = HEX_to_DEC(tokens[i].str);
 			a++;
 		}
