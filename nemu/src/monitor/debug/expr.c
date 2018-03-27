@@ -255,7 +255,6 @@ uint32_t expr(char *e, bool *success)
 
 			data[a] = atoi(tokens[i].str);
 			a++;
-			printf("a = %d\n",a);
 		}
 		else if (tokens[i].type == TK_HEX)
 		{
@@ -269,8 +268,6 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_RIGHT)
 		{
-			printf("a = %d\n", a);
-			printf("b = %d\n", b);
 			if (i >= 1 && operator[i - 1] == TK_LEFT)
 			{
 				b--;
@@ -300,8 +297,6 @@ uint32_t expr(char *e, bool *success)
 				}
 				b--;
 				b--;	//pop Left
-				printf("a = %d\n", a);
-				printf("b = %d\n", b);
 				if (b == 0)
 				{
 					operator[b] = TK_NOTYPE;
@@ -476,7 +471,7 @@ uint32_t expr(char *e, bool *success)
  else if (a == 1 && b == 0)
  {
 	 *success = true;
-	 return 0;
+	 return data[0];
  }
  else if((a == 1 && b == 2 && operator[0] == TK_LEFT && operator[1] == TK_RIGHT) || a == 1)
  {
