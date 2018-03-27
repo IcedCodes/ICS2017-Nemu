@@ -18,6 +18,7 @@ void init_wp_pool() {
   head = NULL;
   free_ = wp_pool;
 }
+
 WP* new_wp(char *args)
 {
 	WP *p = free_;
@@ -27,6 +28,19 @@ WP* new_wp(char *args)
 		p -> next = NULL;
 		p->expression = args;
 		p->busy = true;
+		WP *q = head;
+		if (q == NULL)
+		{
+			head = p;
+		}
+		else
+		{
+			while(q ->next != NULL)
+			{
+				q = q->next;
+			}
+			q->next = p;
+		}
 		return p;
 	}
 	WP *q;
@@ -39,6 +53,16 @@ WP* new_wp(char *args)
 			q->next = NULL;
 			q->expression = args;
 			q->busy = true;
+			p = head;
+			if (p == NULL)
+			{
+				head = q;
+			}
+			else
+			{
+				while(p->next != NULL)p = p->next;
+				p->next = q;
+			}
 			return q;
 		}
 		else
