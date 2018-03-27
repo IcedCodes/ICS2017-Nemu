@@ -136,8 +136,8 @@ static int cmd_p(char *args)
 
 static int cmd_w(char *args)
 {
-	bool *success = false;
-	expr(args, success);
+	bool success;
+	expr(args, &success);
 	if (success)
 	{
 		printf("%s\n", args);
