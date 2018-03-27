@@ -121,15 +121,15 @@ uint32_t HEX_to_DEC(char *arg)
 	{
 		if (arg[i] <= '9' && arg[i] >= '0')
 		{
-			result += arg[i] - '0';
+			result = result *16 + arg[i] - '0';
 		}
 		else if(arg[i] <= 'f' && arg[i] >= 'a')
 		{
-			result += arg[i] - 'a' + 10;
+			result = result * 16 + arg[i] - 'a' + 10;
 		}
 		else if (arg[i] <= 'F' && arg[i] >= 'A')
 		{
-			result += arg[i] - 'A' + 10;
+			result = result * 16 + arg[i] - 'A' + 10;
 		}
 		i++;
 	}
