@@ -263,6 +263,7 @@ uint32_t expr(char *e, bool *success)
 			}
 			else
 			{
+				printf("OK\n");
 				b--;
 				if (operator[b - 1] == TK_PLUS)
 				{
