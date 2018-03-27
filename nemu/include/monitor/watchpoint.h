@@ -5,11 +5,13 @@
 
 typedef struct watchpoint {
   int NO;
+  int value;
   struct watchpoint *next;
-
-  /* TODO: Add more members if necessary */
-
-
+  char *expression;
+  bool busy;
 } WP;
-
+WP* new_wp();
+void free_wp(WP *wp);
+void show();
+WP* checkchange();
 #endif
