@@ -253,6 +253,7 @@ uint32_t expr(char *e, bool *success)
 		else if (tokens[i].type == TK_LEFT)
 		{
 			operator[b] = TK_LEFT;
+			b++;
 		}
 		else if (tokens[i].type == TK_RIGHT)
 		{
