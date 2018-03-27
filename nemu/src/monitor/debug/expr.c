@@ -28,7 +28,7 @@ static struct rule {
   {"\\-",TK_MINUS},		//minus
   {"\\*",TK_MULTIPLY},		//multiply
   {"\\/",TK_DIVIDE},		//divide
-  {"0[xX][0-9a-fA-F]{1,8}",TK_HEX},     //hex
+  {"0[xX][0-9a-fA-F]+",TK_HEX},     //hex
   {"(\\$eax)|(\\$ebx)|(\\$ecx)|(\\$edx)|(\\$ebp)|(\\$esi)|(\\$edi)|(\\$esp)|(\\$eip)",TK_REG},
   {"[0-9]{1,8}",TK_NUMBERS},	//numbers
   {"\\(",TK_LEFT},
@@ -236,7 +236,6 @@ uint32_t expr(char *e, bool *success)
 		}
 	}
 	a = b = 0;
-	printf("%d\n", i);
 	operator[0] = TK_NOTYPE;
 	for (i = 0; i < nr_token; i++)
 	{
