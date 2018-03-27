@@ -136,11 +136,11 @@ static int cmd_p(char *args)
 
 static int cmd_w(char *args)
 {
-	printf("%s\n", args);
 	bool *success = false;
 	expr(args, success);
 	if (success)
 	{
+		printf("%s\n", args);
 		new_wp(args);
 	}
 	else printf("Wrong expression!\n");

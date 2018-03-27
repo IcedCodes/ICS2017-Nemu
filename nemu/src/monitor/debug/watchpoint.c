@@ -26,6 +26,7 @@ WP* new_wp(char *args)
 		free_ = p->next;
 		p -> next = NULL;
 		p->expression = args;
+		p->busy = true;
 		return p;
 	}
 	WP *q;
@@ -37,6 +38,7 @@ WP* new_wp(char *args)
 			p->next = q->next;	//relink
 			q->next = NULL;
 			q->expression = args;
+			q->busy = true;
 			return q;
 		}
 		else
@@ -84,6 +86,7 @@ void free_wp(int num)
 	{
 		free_ = q;
 		q->next = p;
+		q->busy = false;
 		return;
 	}
 	else
@@ -95,6 +98,7 @@ void free_wp(int num)
 			{
 				p->next = q;
 				q->next = r;
+				q->busy = false;
 				return;
 			}
 			else
