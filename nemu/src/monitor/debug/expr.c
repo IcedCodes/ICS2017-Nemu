@@ -113,7 +113,6 @@ static bool make_token(char *e) {
 }
 uint32_t HEX_to_DEC(char *arg)
 {
-	printf("HEX_to_DEC\n");
 	int i; 
 	uint32_t result;
 	i = 2;
