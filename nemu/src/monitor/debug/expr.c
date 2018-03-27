@@ -234,6 +234,7 @@ uint32_t expr(char *e, bool *success)
 		}
 	}
 	a = b = 0;
+	printf("%d\n", i);
 	operator[0] = TK_NOTYPE;
 	for (i = 0; i < nr_token; i++)
 	{
