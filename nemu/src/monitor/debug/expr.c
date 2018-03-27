@@ -119,7 +119,6 @@ uint32_t HEX_to_DEC(char *arg)
 	result = 0;
 	while (arg[i] != '\0')
 	{
-		printf("%d\n", i);
 		if (arg[i] <= '9' && arg[i] >= '0')
 		{
 			result += arg[i] - '0';
@@ -132,6 +131,7 @@ uint32_t HEX_to_DEC(char *arg)
 		{
 			result += arg[i] - 'A' + 10;
 		}
+		i++;
 	}
 	return result;
 }
