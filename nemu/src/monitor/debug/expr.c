@@ -167,6 +167,11 @@ bool solve(int type)
 	}
 	else if (type == TK_MULTIPLY || type == TK_DIVIDE)
 	{
+		if (operator[b - 1] == TK_LEFT)
+		{
+			operator[b] = type;
+			b++;
+		}
 		if (operator[b - 1] == TK_DIVIDE)
 		{
 			divide();
@@ -185,6 +190,11 @@ bool solve(int type)
 	}
 	else if (type == TK_PLUS || type == TK_MINUS)
 	{
+		if (operator[b - 1] == TK_LEFT)
+		{
+			operator[b] = type;
+			b++;
+		}
 		if (operator[b - 1] == TK_PLUS)
 		{
 			plus();
@@ -262,6 +272,10 @@ uint32_t expr(char *e, bool *success)
 			{
 				*success = false;
 				return 0;
+			}
+			else if (operator[b - 1] == TK_LEFT)
+			{
+				b--;
 			}
 			else
 			{
