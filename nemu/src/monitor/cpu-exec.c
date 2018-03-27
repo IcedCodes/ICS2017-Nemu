@@ -31,7 +31,7 @@ void cpu_exec(uint64_t n) {
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
     WP *change;
-    bool *success = false;
+    bool success;
     change = checkchange();
     if (change != NULL)
     {
@@ -39,10 +39,10 @@ void cpu_exec(uint64_t n) {
 	printf("NO: %d\n", change->NO);
 	printf("Old Value: %d\n",change->value);
 	printf("Expression: %s\n", change->expression);
-	change->value = expr(change->expression, success);
+	change->value = expr(change->expression, &success);
 	printf("New Value: %d\n",change->value);
+	nemu_state = NEMU_STOP;
     }
-    nemu_state = NEMU_STOP;
 #endif
 
 #ifdef HAS_IOE
