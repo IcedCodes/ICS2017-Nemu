@@ -256,6 +256,7 @@ uint32_t expr(char *e, bool *success)
 		}
 		else if (tokens[i].type == TK_RIGHT)
 		{
+			printf("%d\n", b);
 			if (b == 0 || operator[b - 2] != TK_LEFT)
 			{
 				*success = false;
