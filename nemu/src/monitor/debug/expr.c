@@ -88,6 +88,8 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+	//Clear Every token's str
+	strcpy(tokens[i].str, "");
 	tokens[nr_token].type = rules[i].token_type;
 	for (j = 0; j < substr_len; j++)
 	{
