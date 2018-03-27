@@ -232,7 +232,7 @@ uint32_t expr(char *e, bool *success)
 	for (i = 0; i < nr_token; i++)
 	{
 		if (tokens[i].type == TK_MULTIPLY && i == 0 && tokens[i + 1].type == TK_HEX)tokens[i].type = TK_MEMORY;
-		else if(tokens[i].type == TK_MULTIPLY && tokens[i - 1].type == TK_RIGHT && tokens[i + 1].type == TK_RIGHT)
+		else if(tokens[i].type == TK_MULTIPLY && tokens[i - 1].type == TK_RIGHT)
 		{
 			tokens[i].type = TK_MULTIPLY;
 		}
