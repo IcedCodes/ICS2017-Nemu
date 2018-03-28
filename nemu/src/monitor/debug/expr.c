@@ -111,10 +111,10 @@ static bool make_token(char *e) {
 
   return true;
 }
-uint32_t HEX_to_DEC(char *arg)
+uint32_t  HEX_to_DEC(char *arg)
 {
 	int i; 
-	uint32_t result;
+	uint32_t  result;
 	i = 2;
 	result = 0;
 	while (arg[i] != '\0')
