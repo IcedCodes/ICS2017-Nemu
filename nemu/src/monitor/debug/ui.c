@@ -139,12 +139,12 @@ static int cmd_w(char *args)
 	bool success;
 	if(args[0] == '$' && args[1] == 'e' && args[2] == 'i' && args[3] == 'p')
 	{
-		char *arg = strtok(NULL, args);
+		char *arg = strtok(NULL, " ");
 		printf("arg: %s\n",arg);
 		printf("Check == \n");
 		if(arg != NULL && arg[0] == '=' && arg[1] == '=')
 		{
-			arg = strtok(NULL, args);
+			arg = strtok(NULL, " ");
 			printf("arg after == : %s\n",arg);
 			printf("OK\n");
 			int i = 2;
