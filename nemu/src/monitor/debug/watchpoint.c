@@ -1,6 +1,6 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
-
+#include "nemu.h"
 #define NR_WP 32
 
 static WP wp_pool[NR_WP];
@@ -12,13 +12,67 @@ void init_wp_pool() {
     wp_pool[i].NO = i;
     wp_pool[i].next = &wp_pool[i + 1];
     wp_pool[i].busy = false;
+    wp_pool[i].breakpoint = false;
   }
   wp_pool[NR_WP - 1].next = NULL;
-
   head = NULL;
   free_ = wp_pool;
 }
-
+WP* new_bp(char *args, int value)
+{
+	WP *p = free_;
+	if (free_->busy == false)
+	{
+		free_ = p->next;
+		p->next = NULL;
+		strcpy(p->expression, args);
+		p->busy = true;
+		p->breakpoint = true;
+		p->stop = value;
+		WP *q = head;
+		if (q == NULL)
+		{
+			head = p;
+		}
+		else
+		{
+			while(q->next != NULL)q = q->next;
+			q->next = p;
+			return p;
+		}
+	}
+	WP *q;
+	q = p->next;
+	while(q!= NULL)
+	{
+		if(q->busy == false)
+		{
+			p ->next = q->next;
+			q->next = NULL;
+			strcpy(q->expression,args);
+			q->stop = value;
+			q->busy = true;
+			p = head;
+			if(p == NULL)
+			{
+				head = q;
+				return q;
+			}
+			else
+			{
+				while(p->next != NULL)p = p->next;
+				p->next = q;
+				return q;
+			}
+		}
+		else
+		{
+			q = q->next;
+		}
+	}
+	printf("No aviliable watchpoint!\n");
+	return NULL;
+}
 WP* new_wp(char *args)
 {
 	bool success;
@@ -114,6 +168,7 @@ void free_wp(int num)
 		free_ = q;
 		q->next = p;
 		q->busy = false;
+		q->breakpoint = false;
 		return;
 	}
 	else
@@ -126,6 +181,7 @@ void free_wp(int num)
 				p->next = q;
 				q->next = r;
 				q->busy = false;
+				q->breakpoint = false;
 				return;
 			}
 			else
@@ -147,23 +203,28 @@ void show()
 		printf("There is no watchpoint!\n");
 		return;
 	}
-	printf("NO \t Value\t\t Expression\n");
+	printf("NO \t Breakpoint\t Value\t\t \tExpression\n");
 	while(p != NULL)
 	{
-		printf("%d \t%d\t\t %s\n",p->NO,p->value,p->expression);
+		printf("%d \t%d\t\t",p->NO,p->value);
+		if(p->breakpoint == false)printf("No\t%d\t\t%s\n",p->value,p->expression);
+		else printf("Yes\t%d\t\t $eip == %s",p->stop,p->expression);
 		p = p->next;
 	}
 }
 
 WP* checkchange()
 {
-	printf("Start Checkchange\n");
 	WP* p;
 	p = head;
 	bool success = false;
 	while (p != NULL)
 	{
-		if (p->value != expr(p->expression, &success))return p;
+		if (p->breakpoint)
+		{
+			if(cpu.eip == p->stop)return p;
+		}
+		else if(p->value != expr(p->expression, &success))return p;
 		p = p->next;
 	}
 	return NULL;

@@ -134,9 +134,44 @@ static int cmd_p(char *args)
 	return 0;
 }
 
+int HEX_to_DEC(char *arg)
+{
+	int i; 
+	uint32_t result;
+	i = 2;
+	result = 0;
+	while (arg[i] != '\0')
+	{
+		if (arg[i] <= '9' && arg[i] >= '0')
+		{
+			result = result *16 + arg[i] - '0';
+		}
+		else if(arg[i] <= 'f' && arg[i] >= 'a')
+		{
+			result = result * 16 + arg[i] - 'a' + 10;
+		}
+		else if (arg[i] <= 'F' && arg[i] >= 'A')
+		{
+			result = result * 16 + arg[i] - 'A' + 10;
+		}
+		i++;
+	}
+	return result;
+}
+
 static int cmd_w(char *args)
 {
 	bool success;
+	if(args[0] == '$' && args[1] == 'e' && args[2] == 'i' && args[3] == 'p')
+	{
+		char *arg = strtok(NULL, args);
+		if(arg[0] == '0' && arg[1] == 'x')
+		{
+			int value = HEX_to_DEC(arg);
+			new_bp(arg, value);
+			printf("Successfully create a new breakpoint!\n");
+		}
+	}
 	expr(args, &success);
 	if (success)
 	{

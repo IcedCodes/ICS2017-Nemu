@@ -35,6 +35,10 @@ void cpu_exec(uint64_t n) {
     change = checkchange();
     if (change != NULL)
     {
+	if(change->breakpoint == true)
+	{
+		printf("Stop at a breakpoint at %d\n",change->stop);
+	}
 	printf("Stop at a watchpoint!\n");
 	printf("NO: %d\n", change->NO);
 	printf("Old Value: %d\n",change->value);

@@ -9,8 +9,11 @@ typedef struct watchpoint {
   struct watchpoint *next;
   char expression[32];
   bool busy;
+  bool breakpoint;
+  int stop;
 } WP;
 WP* new_wp(char *args);
+WP* new_bp(char *args, int value);
 void free_wp(int num);
 void show();
 WP* checkchange();
