@@ -189,7 +189,9 @@ static int cmd_w(char *args)
 
 static int cmd_d(char *args)
 {
-	int num = atoi(args);
+	char *arg = strtok(NULL, " ");
+	int num = atoi(arg);
+	printf("num: %d\n", num);
 	free_wp(num);
 	return 0;
 }
