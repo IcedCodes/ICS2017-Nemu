@@ -208,8 +208,8 @@ void show()
 	while(p != NULL)
 	{
 		printf("%d \t",p->NO);
-		if(p->breakpoint == false)printf("No\t%d\t\t%s\n",p->value,p->expression);
-		else printf("Yes\t%d\t\t $eip == %s\n",p->stop,p->expression);
+		if(p->breakpoint == false)printf("No\t\t%d\t\t%s\n",p->value,p->expression);
+		else printf("Yes\t\t%d\t\t $eip == %s\n",p->stop,p->expression);
 		p = p->next;
 	}
 }
