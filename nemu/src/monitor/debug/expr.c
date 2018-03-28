@@ -7,7 +7,7 @@
 #include <regex.h>
 #include <memory/memory.h>
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,TK_LEFT,TK_RIGHT,TK_REG,
+  TK_NOTYPE = 256,  TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,TK_LEFT,TK_RIGHT,TK_REG,
   TK_MEMORY,TK_HEX,
 
   /* TODO: Add more token types */
@@ -24,7 +24,6 @@ static struct rule {
    */
   {" +", TK_NOTYPE},    // spaces
   {"\\+",TK_PLUS},         // plus
-  {"==", TK_EQUAL},        // equal
   {"\\-",TK_MINUS},		//minus
   {"\\*",TK_MULTIPLY},		//multiply
   {"\\/",TK_DIVIDE},		//divide
