@@ -37,15 +37,19 @@ void cpu_exec(uint64_t n) {
     {
 	if(change->breakpoint == true)
 	{
-		printf("Stop at a breakpoint at %d\n",change->stop);
+		printf("Stop at a breakpoint at 0x%08x\n",change->stop);
+		nemu_state = NEMU_STOP;
 	}
-	printf("Stop at a watchpoint!\n");
-	printf("NO: %d\n", change->NO);
-	printf("Old Value: %d\n",change->value);
-	printf("Expression: %s\n", change->expression);
-	change->value = expr(change->expression, &success);
-	printf("New Value: %d\n",change->value);
-	nemu_state = NEMU_STOP;
+	else
+	{
+		printf("Stop at a watchpoint!\n");
+		printf("NO: %d\n", change->NO);
+		printf("Old Value: %d\n",change->value);
+		printf("Expression: %s\n", change->expression);
+		change->value = expr(change->expression, &success);
+		printf("New Value: %d\n",change->value);
+		nemu_state = NEMU_STOP;
+	}
     }
 #endif
 
