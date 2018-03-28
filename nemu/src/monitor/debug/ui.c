@@ -171,9 +171,9 @@ static int cmd_w(char *args)
 				if(new_bp(arg, result) != NULL)
 				{
 					printf("Successfully create a new breakpoint!\n");
-					return 0;
 				}
 			}
+			return 0;
 		}
 	}
 	expr(args, &success);

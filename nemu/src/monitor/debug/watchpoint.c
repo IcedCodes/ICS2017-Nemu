@@ -33,6 +33,7 @@ WP* new_bp(char *args, int value)
 		if (q == NULL)
 		{
 			head = p;
+			return p;
 		}
 		else
 		{
@@ -208,7 +209,7 @@ void show()
 	{
 		printf("%d \t",p->NO);
 		if(p->breakpoint == false)printf("No\t%d\t\t%s\n",p->value,p->expression);
-		else printf("Yes\t%d\t\t $eip == %s",p->stop,p->expression);
+		else printf("Yes\t%d\t\t $eip == %s\n",p->stop,p->expression);
 		p = p->next;
 	}
 }
