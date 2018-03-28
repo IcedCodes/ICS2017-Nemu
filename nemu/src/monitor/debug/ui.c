@@ -141,7 +141,7 @@ static int cmd_w(char *args)
 	{
 		char *arg = strtok(NULL, args);
 		printf("Check == \n");
-		if(arg[0] == '=' && arg[1] == '=')
+		if(arg != NULL && arg[0] == '=' && arg[1] == '=')
 		{
 			arg = strtok(NULL, args);
 			printf("OK\n");
