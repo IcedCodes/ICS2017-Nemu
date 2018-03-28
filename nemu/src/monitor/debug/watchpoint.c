@@ -150,6 +150,7 @@ void free_wp(int num)
 			if (q->NO == num)
 			{
 				p ->next = q->next;
+				break;
 			}
 			else
 			{
@@ -163,6 +164,7 @@ void free_wp(int num)
 		printf("There is no such watchpoint!\n");
 		return;
 	}
+	printf("Get it\n");
 	p = free_;
 	if (p->NO > q->NO)
 	{
