@@ -171,6 +171,7 @@ void free_wp(int num)
 		q->next = p;
 		q->busy = false;
 		q->breakpoint = false;
+		printf("Successfully delete watchpoint NO.%d\n",num);
 		return;
 	}
 	else
@@ -184,6 +185,7 @@ void free_wp(int num)
 				q->next = r;
 				q->busy = false;
 				q->breakpoint = false;
+				printf("Successfully delete watchpoint NO.%d\n",num);
 				return;
 			}
 			else
@@ -195,7 +197,6 @@ void free_wp(int num)
 		p->next = q;
 		q->next = NULL;
 	}
-	printf("Successfully delete watchpoint NO.%d\n",num);
 }
 void show()
 {
