@@ -206,7 +206,7 @@ void show()
 	printf("NO \t Breakpoint\t Value\t\t \tExpression\n");
 	while(p != NULL)
 	{
-		printf("%d \t%d\t\t",p->NO,p->value);
+		printf("%d \t",p->NO);
 		if(p->breakpoint == false)printf("No\t%d\t\t%s\n",p->value,p->expression);
 		else printf("Yes\t%d\t\t $eip == %s",p->stop,p->expression);
 		p = p->next;
