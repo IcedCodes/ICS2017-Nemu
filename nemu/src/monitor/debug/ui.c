@@ -191,7 +191,6 @@ static int cmd_d(char *args)
 {
 	char *arg = strtok(NULL, " ");
 	int num = atoi(arg);
-	printf("num: %d\n", num);
 	free_wp(num);
 	return 0;
 }
