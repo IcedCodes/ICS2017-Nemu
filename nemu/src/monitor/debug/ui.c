@@ -137,6 +137,7 @@ static int cmd_p(char *args)
 static int cmd_w(char *args)
 {
 	bool success;
+	WP *p;
 	if(args[0] == '$' && args[1] == 'e' && args[2] == 'i' && args[3] == 'p')
 	{
 		char *arg = strtok(NULL, " ");
@@ -164,9 +165,12 @@ static int cmd_w(char *args)
 					}
 					i++;
 				}
-				if(new_bp(arg, result) != NULL)
+				p = new_bp(arg, result);
+				if(p != NULL)
 				{
 					printf("Successfully create a new breakpoint!\n");
+					printf("NO: %d\t Stop: %d\t Expression: $eip == %s\n",p->NO,p->stop,p->expression);
+
 				}
 			}
 			return 0;
@@ -175,7 +179,7 @@ static int cmd_w(char *args)
 	expr(args, &success);
 	if (success)
 	{
-		WP *p = new_wp(args);
+		p = new_wp(args);
 		printf("Successfully create a new watchpoint!\n");
 		printf("NO: %d\t Value: %d\t Expression: %s\n",p->NO,p->value,p->expression);
 	}
