@@ -140,30 +140,34 @@ static int cmd_w(char *args)
 	if(args[0] == '$' && args[1] == 'e' && args[2] == 'i' && args[3] == 'p')
 	{
 		char *arg = strtok(NULL, args);
-		int i = 2;
-		int result = 0;
-		if(arg[0] == '0' && arg[1] == 'x')
+		if(arg[0] == '=' && arg[1] == '=')
 		{
-			while (arg[i] != '\0')
+			arg = strtok(NULL, args);
+			int i = 2;
+			int result = 0;
+			if(arg[0] == '0' && arg[1] == 'x')
 			{
-				if (arg[i] <= '9' && arg[i] >= '0')
+				while (arg[i] != '\0')
 				{
-					result = result *16 + arg[i] - '0';
+					if (arg[i] <= '9' && arg[i] >= '0')
+					{
+						result = result *16 + arg[i] - '0';
+					}
+					else if(arg[i] <= 'f' && arg[i] >= 'a')
+					{
+						result = result * 16 + arg[i] - 'a' + 10;
+					}
+					else if (arg[i] <= 'F' && arg[i] >= 'A')
+					{
+						result = result * 16 + arg[i] - 'A' + 10;
+					}
+					i++;
 				}
-				else if(arg[i] <= 'f' && arg[i] >= 'a')
+				if(new_bp(arg, result) != NULL)
 				{
-					result = result * 16 + arg[i] - 'a' + 10;
+					printf("Successfully create a new breakpoint!\n");
+					return 0;
 				}
-				else if (arg[i] <= 'F' && arg[i] >= 'A')
-				{
-					result = result * 16 + arg[i] - 'A' + 10;
-				}
-				i++;
-			}
-			if(new_bp(arg, result) != NULL)
-			{
-				printf("Successfully create a new breakpoint!\n");
-				return 0;
 			}
 		}
 	}
