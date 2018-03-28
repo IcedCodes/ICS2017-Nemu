@@ -195,6 +195,7 @@ void free_wp(int num)
 		p->next = q;
 		q->next = NULL;
 	}
+	printf("Successfully delete watchpoint NO.%d\n",num);
 }
 void show()
 {
