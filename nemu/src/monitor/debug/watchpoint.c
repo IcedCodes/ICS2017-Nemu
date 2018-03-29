@@ -226,6 +226,7 @@ WP* checkchange()
 	{
 		if (p->breakpoint)
 		{
+			p->stop = expr(p->expression, &success);
 			if(cpu.eip == p->stop)return p;
 		}
 		else if(p->value != expr(p->expression, &success))return p;
