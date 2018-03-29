@@ -146,7 +146,6 @@ static int cmd_w(char *args)
 		{
 			int result;
 			arg = strtok(NULL, " ");
-			printf("arg: %s\n", arg);
 			result = expr(arg, &success);
 			if(success == true)
 			{
