@@ -239,6 +239,18 @@ uint32_t expr(char *e, bool *success)
 		{
 			tokens[i].type = TK_MULTIPLY;
 		}
+		else if(tokens[i].type == TK_MULTIPLY && tokens[i - 1].type == TK_NUMBERS && tokens[i + 1].type == TK_HEX)
+		{
+			tokens[i].type = TK_MULTIPLY;
+		}
+		else if(tokens[i].type == TK_MULTIPLY && tokens[i - 1].type == TK_HEX && tokens[i + 1].type == TK_HEX)
+		{
+			tokens[i].type = TK_MULTIPLY;
+		}
+		else if(tokens[i].type == TK_MULTIPLY && tokens[i - 1].type == TK_HEX && tokens[i + 1].type == TK_NUMBERS)
+		{
+			tokens[i].type = TK_MULTIPLY;
+		}
 		else if (tokens[i].type == TK_MULTIPLY)
 		{
 			tokens[i].type = TK_MEMORY;
