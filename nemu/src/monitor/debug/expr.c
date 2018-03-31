@@ -260,6 +260,7 @@ uint32_t expr(char *e, bool *success)
 	operator[0] = TK_NOTYPE;
 	for (i = 0; i < nr_token; i++)
 	{
+		printf("%d\n", tokens[i].type);
 		if (tokens[i].type ==TK_NOTYPE)continue;
 		if (tokens[i].type == TK_NUMBERS)
 		{
