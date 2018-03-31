@@ -85,6 +85,8 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+
+	//Ignore the space
 	if (rules[i].token_type == TK_NOTYPE)continue;
 	//Clear Every token's str
 	memset(tokens[nr_token].str, '\0',sizeof(tokens[nr_token].str));
@@ -260,7 +262,6 @@ uint32_t expr(char *e, bool *success)
 	operator[0] = TK_NOTYPE;
 	for (i = 0; i < nr_token; i++)
 	{
-		printf("%d\n", tokens[i].type);
 		if (tokens[i].type ==TK_NOTYPE)continue;
 		if (tokens[i].type == TK_NUMBERS)
 		{
