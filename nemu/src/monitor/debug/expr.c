@@ -7,8 +7,7 @@
 #include <regex.h>
 #include <memory/memory.h>
 enum {
-  TK_NOTYPE = 256,  TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,TK_LEFT,TK_RIGHT,TK_REG,
-  TK_MEMORY,TK_HEX,
+  TK_NOTYPE = 256,  TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE, TK_EQUAL,TK_NUMBERS,TK_LEFT,TK_RIGHT,TK_REG,TK_MEMORY,TK_HEX,
 
   /* TODO: Add more token types */
 
@@ -86,6 +85,7 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+	if (rules[i].token_type == TK_NOTYPE)continue;
 	//Clear Every token's str
 	memset(tokens[nr_token].str, '\0',sizeof(tokens[nr_token].str));
 	tokens[nr_token].type = rules[i].token_type;
