@@ -111,12 +111,12 @@ static inline void rtl_sr(int r, int width, const rtlreg_t* src1) {
   }
 }
 
-#define make_rtl_setget_eflags(f) \
-  static inline void concat(rtl_set_, f) (const rtlreg_t* src) { \
-    TODO(); \
+#define make_rtl_setget_eflags(name) \
+  static inline void concat(rtl_set_, name) (const rtlreg_t* src) { \
+		  cpu.eflags.BIT.name = *src;\
   } \
-  static inline void concat(rtl_get_, f) (rtlreg_t* dest) { \
-    TODO(); \
+  static inline void concat(rtl_get_, name) (rtlreg_t* dest) { \
+    *dest = cpu.eflags.BIT.name; \
   }
 
 make_rtl_setget_eflags(CF)
@@ -126,7 +126,7 @@ make_rtl_setget_eflags(SF)
 
 static inline void rtl_mv(rtlreg_t* dest, const rtlreg_t *src1) {
   // dest <- src1
-  TODO();
+  *dest = *src1;
 }
 
 static inline void rtl_not(rtlreg_t* dest) {
@@ -142,13 +142,14 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 static inline void rtl_push(const rtlreg_t* src1) {
   // esp <- esp - 4
   // M[esp] <- src1
-  TODO();
+  rtl_subi(&cpu.esp, &cpu.esp, 4);
+  rtl_sm(&cpu.esp, 4, src1);
 }
 
 static inline void rtl_pop(rtlreg_t* dest) {
   // dest <- M[esp]
   // esp <- esp + 4
-  TODO();
+  rtl_addi(&cpu.esp, &cpu.esp, 4);
 }
 
 static inline void rtl_eq0(rtlreg_t* dest, const rtlreg_t* src1) {
