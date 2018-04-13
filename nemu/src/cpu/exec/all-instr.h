@@ -1,6 +1,4 @@
 #include "cpu/exec.h"
-#include "push.h"
-#include "pop.h"
 make_EHelper(mov);
 
 make_EHelper(operand_size);
