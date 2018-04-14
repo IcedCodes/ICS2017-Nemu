@@ -10,6 +10,9 @@ make_EHelper(push) {
 	print_asm_template1(push);
 }
 
+make_EHelper(call) {
+		cpu.eip = id_dest->val;
+}
 make_EHelper(pop) {
   TODO();
 
