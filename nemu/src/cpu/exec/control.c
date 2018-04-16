@@ -29,7 +29,7 @@ make_EHelper(call) {
   rtl_push(&cpu.eip+4);
   printf("decoding.jmp_eip: %d\n id_dest->val:%d\nid_src->val:%d\nid_src2->val: %d\n", decoding.jmp_eip,id_dest->val,id_src->val,id_src2->val);
   rtl_addi(&cpu.eip, &cpu.eip, id_src->val);
-  decoding.jmp_eip = id_dest->val;
+  decoding.jmp_eip = cpu.eip;
   print_asm("call %x", decoding.jmp_eip);
 }
 
