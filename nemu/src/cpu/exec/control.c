@@ -28,7 +28,8 @@ make_EHelper(call) {
   printf("decoding.jmp_eip: %d\n id_dest->val:%d\nid_src->val:%d\nid_src2->val: %d\n", decoding.jmp_eip,id_dest->val,id_src->val,id_src2->val);
   rtl_push(&cpu.eip+4);
   printf("decoding.jmp_eip: %d\n id_dest->val:%d\nid_src->val:%d\nid_src2->val: %d\n", decoding.jmp_eip,id_dest->val,id_src->val,id_src2->val);
-  rtl_mv(&cpu.eip, &id_src->val); 
+  //rtl_addi()
+  decoding.jmp_eip = id_dest->val;
   print_asm("call %x", decoding.jmp_eip);
 }
 
