@@ -52,7 +52,7 @@ static inline make_DopHelper(SI) {
 		  op->simm = (int16_t)(int8_t)((uint8_t)instr_fetch(eip, op->width));
   }
   */
-  TODO();
+  op->imm = instr_fetch(eip, op->width);
   rtl_li(&op->val, op->simm);
 
 #ifdef DEBUG
