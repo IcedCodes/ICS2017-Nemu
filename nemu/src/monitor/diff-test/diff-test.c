@@ -153,7 +153,7 @@ void difftest_step(uint32_t eip) {
   {
 		  diff = true;
 		  printf("There is some differences between Nemu and Qemu!\n");
-		  printf("Regs\t   Qemu\t\t Nemu\n");
+		  printf("Regs\t   Qemu\t\t\t   Nemu\n");
 		  printf("eax\t %08x\t\t %08x\n", r.eax, cpu.eax);
 		  printf("ebx\t %08x\t\t %08x\n", r.ebx, cpu.ebx);
 		  printf("ecx\t %08x\t\t %08x\n", r.ecx, cpu.ecx);
