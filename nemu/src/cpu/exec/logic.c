@@ -7,7 +7,8 @@ make_EHelper(test) {
 }
 
 make_EHelper(and) {
-  TODO();
+  uint32_t result = id_dest->val & id_src->val;
+  operand_write(id_dest, &result);
 
   print_asm_template2(and);
 }
