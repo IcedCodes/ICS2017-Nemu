@@ -14,7 +14,8 @@ make_EHelper(sub) {
 }
 
 make_EHelper(cmp) {
-  TODO();
+  rtl_sub(&t1, &id_dest->val, &id_src->val);
+  rtl_update_ZFSF(&t1, id_dest->width);
 
   print_asm_template2(cmp);
 }
