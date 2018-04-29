@@ -26,5 +26,5 @@ make_EHelper(shr);
 make_EHelper(sar);
 make_EHelper(dec);
 make_EHelper(not);
-
+make_EHelper(and);
 
