@@ -166,9 +166,9 @@ static inline void rtl_neq0(rtlreg_t* dest, const rtlreg_t* src1) {
 
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  if(width == 1)*dest = ((*src1&0x00000080)>0);
-  if(width == 2)*dest = ((*src1&0x00008000)>0);
-  if(width == 4)*dest = ((*src1&0x80000000)>0);
+  if(width == 1)*dest = ((*src1 & 0x00000080)>0);
+  if(width == 2)*dest = ((*src1 & 0x00008000)>0);
+  if(width == 4)*dest = ((*src1 & 0x80000000)>0);
 }
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   //dest <- signext(src1[(width * 8 - 1) .. 0])
