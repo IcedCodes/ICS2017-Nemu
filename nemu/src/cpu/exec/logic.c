@@ -11,7 +11,9 @@ make_EHelper(test) {
 }
 
 make_EHelper(and) {
-  rtl_and(&t1, &id_dest->val ,&t0);
+  //扩展填充
+  rtl_sext(&t2,&id_src->val,id_src->width);
+  rtl_and(&t1, &id_dest->val ,&t2);
   operand_write(id_dest, &t1);
   t0 = 0;
   rtl_set_CF(&t0);
