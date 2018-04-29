@@ -13,10 +13,10 @@ make_EHelper(test) {
 make_EHelper(and) {
   //扩展填充
   printf("id_dest=%x id_src=%x id_src.width=%x dest_width=%x\n",id_dest->val,id_src->val,id_src->width,id_dest->width);
-  rtl_sext(&t2,&id_src->val,id_src->width);
-  rtl_and(&t1, &id_dest->val ,&t2);
-  operand_write(id_dest, &t1);
-  printf("t1: %x\n", t1);
+  rtl_sext(&t0,&id_src->val,id_src->width);
+  rtl_and(&t2, &id_dest->val ,&t0);
+  operand_write(id_dest, &t2);
+  printf("t0: %x\n", t0);
   t0 = 0;
   rtl_set_CF(&t0);
   rtl_set_OF(&t0);
