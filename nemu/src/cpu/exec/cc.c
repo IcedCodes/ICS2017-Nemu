@@ -24,14 +24,14 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     case CC_B:
 			{
 					rtl_get_CF(&a);
-					*dest = a == 1;
+					*dest = (a == 1);
 					break;
 
 			}
     case CC_E:
 			{
 					rtl_get_ZF(&a);
-					*dest = a == 1;
+					*dest = (a == 1);
 					break;
 			}
     case CC_BE:
@@ -44,14 +44,14 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     case CC_S:
 			{
 					rtl_get_SF(&a);
-					*dest = a == 1;
+					*dest = (a == 1);
 					break;
 			}
     case CC_L:
 			{
 					rtl_get_SF(&a);
 					rtl_get_OF(&b);
-					*dest = a != b;
+					*dest = (a != b);
 					break;
 			}
     case CC_LE:
