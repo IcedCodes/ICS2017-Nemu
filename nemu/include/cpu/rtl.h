@@ -180,6 +180,12 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 		  if(width == 2)*dest = (0xffff0000|*src1);
 		  if(width == 4)*dest = *src1;
   }
+  else
+  {
+		  if(width == 1)*dest = 0xff & *src1;
+		  if(width == 2)*dest = 0xffff & *src1;
+		  if(width == 4)*dest = *src1;
+  }
 }
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
