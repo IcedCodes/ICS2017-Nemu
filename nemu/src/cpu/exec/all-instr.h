@@ -20,3 +20,6 @@ make_EHelper(movzx);
 make_EHelper(jcc);
 make_EHelper(test);
 make_EHelper(adc);
+make_EHelper(or);
+
+
