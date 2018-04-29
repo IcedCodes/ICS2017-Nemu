@@ -16,7 +16,7 @@ make_EHelper(and) {
   rtl_sext(&t0,&id_src->val,id_src->width);
   rtl_and(&t2, &id_dest->val ,&t0);
   operand_write(id_dest, &t2);
-  printf("t0: %x\n", t0);
+  printf("t2: %x\n", t2);
   t0 = 0;
   rtl_set_CF(&t0);
   rtl_set_OF(&t0);
