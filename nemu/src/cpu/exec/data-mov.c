@@ -37,11 +37,11 @@ make_EHelper(leave) {
   operand_write(id_dest, &t1);
   if(id_dest->width == 2)
   {
-		  reg_w(cpu.esp) += 2;
+		  reg_w(R_ESP) += 2;
   }
   else
   {
-		  reg_l(cpu.esp) += 4;
+		  reg_l(R_ESP) += 4;
   }
   print_asm("leave");
 }
