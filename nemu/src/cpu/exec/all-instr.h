@@ -37,4 +37,5 @@ make_EHelper(idiv);
 make_EHelper(movsx);
 make_EHelper(cwtl);
 make_EHelper(leave);
+make_EHelper(call_rm);
 
