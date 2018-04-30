@@ -12,7 +12,7 @@ make_EHelper(test) {
 
 make_EHelper(and) {
   //扩展填充
-  printf("id_dest=%x id_src=%x id_src.width=%x dest_width=%x\n",id_dest->val,id_src->val,id_src->width,id_dest->width);
+  //printf("id_dest=%x id_src=%x id_src.width=%x dest_width=%x\n",id_dest->val,id_src->val,id_src->width,id_dest->width);
   rtl_sext(&t0,&id_src->val,id_src->width);
   rtl_and(&t2, &id_dest->val ,&t0);
   operand_write(id_dest, &t2);
