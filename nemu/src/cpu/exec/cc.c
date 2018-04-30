@@ -38,7 +38,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
 			{
 					rtl_get_CF(&a);
 					rtl_get_ZF(&b);
-					*dest = (a == 1 || b == 1);
+					*dest = ( (a == 1) || (b == 1) );
 					break;
 			}
     case CC_S:
@@ -59,7 +59,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
 					rtl_get_ZF(&a);
 					rtl_get_OF(&b);
 					rtl_get_SF(&c);
-					*dest = (a == 1 || (b != c) );
+					*dest = ( (a == 1) || (b != c) );
 					break;
 			}
     default: panic("should not reach here");
