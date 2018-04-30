@@ -30,8 +30,19 @@ make_EHelper(popa) {
 }
 
 make_EHelper(leave) {
-  TODO();
-
+  rtl_mv(&cpu.esp, &cpu.ebp);
+  rtl_lm(&t1, &cpu.esp, id_src->width);
+  id_dest->type = OP_TYPE_REG;
+  id_dest->reg = cpu.ebp;
+  operand_write(id_dest, &t1);
+  if(id_dest->width == 2)
+  {
+		  cpu.esp += 2;
+  }
+  else
+  {
+		  cpu.esp += 4;
+  }
   print_asm("leave");
 }
 
