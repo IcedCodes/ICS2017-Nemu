@@ -20,7 +20,7 @@ make_EHelper(and) {
   t0 = 0;
   rtl_set_CF(&t0);
   rtl_set_OF(&t0);
-  rtl_update_ZFSF(&t1, id_dest->width);
+  rtl_update_ZFSF(&t2, id_dest->width);
 
   print_asm_template2(and);
 }
