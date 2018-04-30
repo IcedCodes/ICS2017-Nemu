@@ -30,19 +30,20 @@ make_EHelper(popa) {
 }
 
 make_EHelper(leave) {
-  reg_l(cpu.esp) = reg_l(cpu.ebp);
-  rtl_lm(&t1, &reg_l(cpu.esp), id_src->width);
+  reg_l(R_ESP) = reg_l(R_EBP);
+  rtl_lm(&t0, &reg_l(R_ESP), id_src->width);
   id_dest->type = OP_TYPE_REG;
-  id_dest->reg = cpu.ebp;
-  operand_write(id_dest, &t1);
-  if(id_dest->width == 2)
+  id_dest->reg = R_EBP;
+  operand_write(id_dest, &t0);
+  if (id_dest->width == 2) 
   {
-		  reg_w(cpu.esp) += 2;
+		  reg_w(R_ESP) += 2;
   }
-  else
+  else 
   {
-		  reg_l(cpu.ebp) += 4;
+		  reg_l(R_ESP) += 4;
   }
+
   print_asm("leave");
 }
 
