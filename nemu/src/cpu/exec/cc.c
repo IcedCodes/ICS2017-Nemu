@@ -17,20 +17,17 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   switch (subcode & 0xe) {
 	case CC_O:
 			{
-				rtl_get_OF(&a);
-				*dest = (a == 1);
+				rtl_get_OF(dest);
 				break;
 			}
 	case CC_B:
 			{
-				rtl_get_CF(&a);
-				*dest = (a == 1);
+				rtl_get_CF(dest);
 				break;
 			}
 	case CC_E:
 			{
-				rtl_get_ZF(&a);
-				*dest = (a == 1);
+				rtl_get_ZF(dest);
 				break;
 			}
 	case CC_BE:
