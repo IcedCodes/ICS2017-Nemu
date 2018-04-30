@@ -29,7 +29,7 @@ make_EHelper(not);
 make_EHelper(and);
 make_EHelper(inc);
 make_EHelper(jmp);
-make_EHelper(imul);
+make_EHelper(imul1);
 make_EHelper(imul2);
 make_EHelper(imul3);
 make_EHelper(cltd);
