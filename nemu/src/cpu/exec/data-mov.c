@@ -12,8 +12,7 @@ make_EHelper(push) {
 }
 
 make_EHelper(pop) {
-  rtl_pop(&t0);
-  operand_write(id_dest, &t0);
+  rtl_pop((rtlreg_t *)&(cpu.gpr[id_dest->reg]));
 
   print_asm_template1(pop);
 }
