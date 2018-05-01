@@ -34,6 +34,14 @@ make_EHelper(xor) {
   print_asm_template2(xor);
 }
 
+make_EHelper(rol){
+	rtl_shl(&t1, &id_dest->val, &id_src->val);
+	rtl_shri(&t2, &id_dest->val, (32-id_src->val));
+	rtl_or(&t1, &t1, &t2);
+	operand_write(id_dest, &t1);
+	rtl_update_ZFSF(&t1, id_dest->width);
+	print_asm_template2(rol);
+}
 make_EHelper(or) {
   rtl_or(&t1, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t1);
