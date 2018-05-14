@@ -14,14 +14,9 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
  * For more details about the register encoding scheme, see i386 manual.
  */
 
-typedef union{
-	struct{
-		uint16_t low;
-		uint8_t :7;
-		uint8_t P:1;
-		uint8_t high;
-	};
-	uint32_t value;
+typedef struct{
+	uint16_t table;
+	uint32_t base;
 }IDTR;
 typedef struct{
 		union{
@@ -57,6 +52,7 @@ typedef union{
   	vaddr_t eip;
 	EFLAGS eflags;
 	IDTR idtr;
+	uint16_t cs;
   };
 } CPU_state;
 
